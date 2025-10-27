@@ -2,8 +2,10 @@ import React, { useState } from 'react'; // Importamos useState
 // Importamos los iconos necesarios, incluyendo Menu y X para el toggle
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X } from 'lucide-react';
 import Logo from "../src/assets/tecnogen.png"
+import VideoSolar from "../src/assets/SolarEnergy.mp4"
+import MobileHeroImg from "../src/assets/HeroMobile.jpg"
 // URL del video de fondo. ¡Reemplaza con tu propio video!
-const DEFAULT_VIDEO_URL = "https://www.w3schools.com/tags/movie.mp4"; // Placeholder
+const DEFAULT_VIDEO_URL = VideoSolar; // Placeholder
 // Color primario de la marca TechnoGen (el verde vibrante)
 const PRIMARY_COLOR = '#0FE778';
 
@@ -11,6 +13,28 @@ const PRIMARY_COLOR = '#0FE778';
 
 // Botón primario de llamado a la acción
 const PrimaryButton = ({ children, className = '' }) => (
+  <button
+    // Las clases se mantienen como string para Tailwind
+    className={`
+      bg-techno-green text-gray-900 font-semibold py-3 px-8 
+      rounded-full shadow-lg hover:bg-opacity-90 
+      transition duration-300 ease-in-out transform hover:scale-[1.02]
+      flex items-center justify-center space-x-2 
+      ${className}
+    `}
+  >
+    {/* ANTES: <span>{children}</span>
+      AHORA: Envolvemos los children con un div/span que también sea flex 
+      para asegurar que el icono y el texto estén en línea.
+    */}
+    <span className="flex items-center space-x-1"> 
+      {children}
+    </span>
+    <ChevronRight size={18} />
+  </button>
+);
+
+const SecondaryButton = ({ children, className = '' }) => (
   <button
     // Las clases se mantienen como string para Tailwind
     className={`
@@ -62,7 +86,7 @@ const Header = () => {
 
         {/* CTA de Contacto (Solo Desktop/Tablet) */}
         <div className="hidden md:block">
-          <PrimaryButton className="py-2 px-6">
+          <PrimaryButton className="py-2 px-6 flex ">
             <Phone size={18} className="mr-1" />
             Hablemos
           </PrimaryButton>
@@ -100,10 +124,10 @@ const Header = () => {
             </a>
           ))}
           {/* CTA en el menú móvil */}
-          <div className="pt-4 pb-2">
-            <PrimaryButton className="w-full">
+          <div className="pt-4 pb-2 w-full">
+            <PrimaryButton className="w-full bg-green-400  ">
               <Phone size={18} className="mr-1" />
-              Hablemos
+              Hablemos 
             </PrimaryButton>
           </div>
         </nav>
@@ -113,7 +137,7 @@ const Header = () => {
 };
 // Sección Principal (Hero)
 const HeroSection = () => (
-  <section id="inicio" className="relative h-[70vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 pt-20">
+  <section id="inicio" className="relative h-[70vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 ">
     {/* Video de Fondo (Solo Desktop) */}
     <video
       className="absolute inset-0 w-full h-full object-cover hidden md:block"
@@ -129,7 +153,11 @@ const HeroSection = () => (
     {/* Fallback de Imagen (Solo Móvil) */}
     <div
       className="absolute inset-0 w-full h-full object-cover md:hidden"
-      style={{ backgroundImage: `url(https://placehold.co/1200x900/222/0FE778?text=Energía+Renovable)`, backgroundSize: 'cover', backgroundPosition: 'center' }}
+      style={{ 
+        backgroundImage: `url(${MobileHeroImg})`, 
+        backgroundSize: 'cover', 
+        backgroundPosition: 'center' 
+      }}
     ></div>
 
     {/* Overlay para mejor contraste de texto sobre video/imagen */}
@@ -143,12 +171,12 @@ const HeroSection = () => (
         Lideramos la transición energética con soluciones solares, eólicas y de eficiencia para un mañana sostenible.
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <PrimaryButton className="text-lg">
+        <PrimaryButton className="text-lg bg-green-500">
           Descubre Soluciones
         </PrimaryButton>
-        <SecondaryButton className="text-lg">
+        <PrimaryButton className="text-lg bg-green-500" >
           Contáctanos Hoy
-        </SecondaryButton>
+        </PrimaryButton>
       </div>
     </div>
   </section>
