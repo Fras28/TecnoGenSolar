@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-// Importamos los iconos necesarios, incluyendo Menu, X, CheckCircle, y Download
+// Importamos los iconos necesarios
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download } from 'lucide-react';
 import Logo from "../src/assets/tecnogen.png"
 import VideoSolar from "../src/assets/SolarEnergy.mp4"
 import MobileHeroImg from "../src/assets/HeroMobile.jpg"
+import VisionMision from "../src/assets/VisionyMision.png"
 
 // -------------------------------------------------------------------
-// 1. IMPORTACIÓN DE LOS ARCHIVOS PDF (¡CAMBIOS APLICADOS AQUÍ!)
-//    Utilizamos las rutas que nos has proporcionado.
+// 1. IMPORTACIÓN DE LOS ARCHIVOS PDF (Rutas internas)
 // -------------------------------------------------------------------
 
 import CatalogGeneralPDF from "./assets/pdfs/Group 410_merged.pdf";
@@ -42,14 +42,12 @@ const PrimaryButton = ({ children, className = '' }) => (
   </button>
 );
 
-// Sección de Cabecera (Header) - Modificado para menú móvil
+// Sección de Cabecera (Header)
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  // Se añade 'Documentación' a los ítems de navegación
   const navItems = ['Soluciones', 'Documentación', 'Proyectos', 'Nosotros', 'Contacto'];
 
-  // Función para cerrar el menú al hacer clic en un enlace (útil en móvil)
   const handleNavLinkClick = () => {
     setIsMenuOpen(false);
   };
@@ -61,7 +59,7 @@ const Header = () => {
         {/* Logo */}
         <a href="#" className="flex items-center text-2xl font-bold text-gray-900">
          <img src={Logo} alt="Logo Tecnogen" width="40px"/>
-          Tecno<span className="text-techno-green">Gen</span>
+          Tecno<span className="text-green-500">Gen</span>
         </a>
 
         {/* Navegación (Solo Desktop/Tablet) */}
@@ -70,7 +68,7 @@ const Header = () => {
             <a
               key={item}
               href={`#${item.toLowerCase().replace('ó', 'o')}`} // Manejo de tildes para IDs
-              className="text-gray-600 hover:text-techno-green transition duration-150"
+              className="text-gray-600 hover:text-green-500 transition duration-150"
             >
               {item}
             </a>
@@ -88,7 +86,7 @@ const Header = () => {
         {/* Menú Móvil (Icono Toggle) */}
         <div className="md:hidden">
           <button 
-            className="text-gray-900 hover:text-techno-green p-2 transition duration-150"
+            className="text-gray-900 hover:text-green-500 p-2 transition duration-150"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
@@ -110,13 +108,12 @@ const Header = () => {
             <a
               key={item}
               href={`#${item.toLowerCase().replace('ó', 'o')}`}
-              onClick={handleNavLinkClick} // Cierra el menú al hacer clic
+              onClick={handleNavLinkClick} 
               className="block py-2 text-gray-700 hover:bg-gray-200 rounded-md transition duration-150"
             >
               {item}
             </a>
           ))}
-          {/* CTA en el menú móvil */}
           <div className="pt-4 pb-2 w-full">
             <PrimaryButton className="w-full bg-green-400  ">
               <Phone size={18} className="mr-1" />
@@ -128,9 +125,10 @@ const Header = () => {
     </header>
   );
 };
-// Sección Principal (Hero)
+
+// Sección Principal (Hero) - Optimizada para Mobile
 const HeroSection = () => (
-  <section id="inicio" className="relative h-[70vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 ">
+  <section id="inicio" className="relative h-[90vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 ">
     {/* Video de Fondo (Solo Desktop) */}
     <video
       className="absolute inset-0 w-full h-full object-cover hidden md:block"
@@ -156,18 +154,20 @@ const HeroSection = () => (
     {/* Overlay para mejor contraste de texto sobre video/imagen */}
     <div className="absolute inset-0 bg-gray-900 opacity-70"></div>
     
-    <div className="relative z-10 text-white p-6 max-w-4xl">
-      <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
-        Transformamos Energía. <span className="text-techno-green">Transformamos el Futuro.</span>
+    {/* Contenido (Título y Botones) */}
+    <div className="relative z-10 text-white p-6 max-w-4xl w-full"> 
+      <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 px-2">
+        Transformamos Energía. <span className="text-green-500">Transformamos el Futuro.</span>
       </h1>
-      <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto">
+      <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto px-2">
         Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
       </p>
-      <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
-        <PrimaryButton className="text-lg bg-green-500">
+      <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
+        {/* Botones Full-Width en Mobile (w-full sm:w-auto) */}
+        <PrimaryButton className="text-lg w-full sm:w-auto bg-green-500">
           Descubre Soluciones
         </PrimaryButton>
-        <PrimaryButton className="text-lg bg-green-500" >
+        <PrimaryButton className="text-lg w-full sm:w-auto bg-green-500" >
           Contáctanos Hoy
         </PrimaryButton>
       </div>
@@ -194,7 +194,7 @@ const ServicesSection = () => {
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 hover:shadow-2xl">
-              <service.icon size={48} className="text-techno-green mb-4" />
+              <service.icon size={48} className="text-green-500 mb-4" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">{service.title}</h3>
               <p className="text-gray-700">{service.description}</p>
             </div>
@@ -205,70 +205,141 @@ const ServicesSection = () => {
   );
 };
 
-// SECCIÓN: Documentación y Catálogos (¡Con URLs de archivos actualizadas!)
+// COMPONENTE MODAL DE PREVISUALIZACIÓN DE PDF
+const PDFPreviewModal = ({ doc, onClose }) => {
+    if (!doc) return null;
+
+    return (
+        // Overlay fijo que se cierra al hacer clic fuera del modal
+        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-75 p-4" onClick={onClose}>
+            {/* Contenedor del Modal */}
+            <div 
+                className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col" 
+                onClick={(e) => e.stopPropagation()} // Evita que el clic dentro cierre el modal
+            >
+                {/* Cabecera del Modal */}
+                <div className="p-4 border-b flex justify-between items-center flex-shrink-0">
+                    <h3 className="text-xl font-semibold text-gray-900">
+                        {doc.title} - Previsualización
+                    </h3>
+                    <button 
+                        onClick={onClose} 
+                        className="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition"
+                        aria-label="Cerrar previsualización"
+                    >
+                        <X size={24} />
+                    </button>
+                </div>
+
+                {/* Contenido del PDF (Iframe) */}
+                {/* La altura se calcula para ocupar el resto del espacio del modal */}
+                <iframe 
+                    src={doc.url} 
+                    title={doc.title}
+                    className="w-full flex-grow" 
+                    frameBorder="0"
+                >
+                    {/* Fallback para navegadores antiguos */}
+                    <p className="p-4 text-center">
+                        Tu navegador no soporta la previsualización de PDF en línea. 
+                        <a href={doc.url} download={doc.filename} className="text-green-500 underline font-medium ml-1">
+                            Haz clic aquí para descargar el documento.
+                        </a>
+                    </p>
+                </iframe>
+            </div>
+        </div>
+    );
+};
+
+
+// SECCIÓN: Documentación y Catálogos (¡Con Previsualización!)
 const CatalogsSection = () => {
-  // Datos de los documentos proporcionados por el usuario
-  const documents = [
-    { 
-      title: 'Catálogo General de Soluciones', 
-      description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
-      filename: 'Group 410_merged.pdf',
-      url: CatalogGeneralPDF, // << URL REAL DEL ARCHIVO >>
-      icon: Leaf 
-    },
-    { 
-      title: 'Bombas de Agua Solares (HANDURO)', 
-      description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
-      filename: 'HANDURO-solar water pump catalog (1).pdf',
-      url: HanduroPumpsPDF, // << URL REAL DEL ARCHIVO >>
-      icon: Zap
-    },
-    { 
-      title: 'Ficha Técnica Termotanque Solar', 
-      description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
-      filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
-      url: TermotanqueDatasheetPDF, // << URL REAL DEL ARCHIVO >>
-      icon: Globe 
-    },
-    { 
-      title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
-      description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
-      filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
-      url: InverterDatasheetPDF, // << URL REAL DEL ARCHIVO >>
-      icon: TrendingUp 
-    },
-  ];
+    // Estado para controlar qué documento se previsualiza
+    const [previewDoc, setPreviewDoc] = useState(null);
+
+    const handlePreview = (doc) => {
+        setPreviewDoc(doc);
+    };
+
+    const handleClosePreview = () => {
+        setPreviewDoc(null);
+    };
+
+    // Datos de los documentos proporcionados por el usuario
+    const documents = [
+        { 
+            title: 'Catálogo General de Soluciones', 
+            description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
+            filename: 'Group 410_merged.pdf',
+            url: CatalogGeneralPDF, 
+            icon: Leaf 
+        },
+        { 
+            title: 'Bombas de Agua Solares (HANDURO)', 
+            description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
+            filename: 'HANDURO-solar water pump catalog (1).pdf',
+            url: HanduroPumpsPDF, 
+            icon: Zap
+        },
+        { 
+            title: 'Ficha Técnica Termotanque Solar', 
+            description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
+            filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
+            url: TermotanqueDatasheetPDF, 
+            icon: Globe 
+        },
+        { 
+            title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
+            description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
+            filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
+            url: InverterDatasheetPDF, 
+            icon: TrendingUp 
+        },
+    ];
 
   return (
     <section id="documentacion" className="py-16 md:py-24 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Documentación y Recursos Técnicos</h2>
         <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          Descargue nuestros catálogos y fichas técnicas actualizadas para conocer en detalle las especificaciones de nuestros productos.
+          Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
         </p>
 
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {documents.map((doc, index) => (
             <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
-              <doc.icon size={36} className="text-techno-green mr-4 flex-shrink-0 mt-1" />
+              <doc.icon size={36} className="text-green-500 mr-4 flex-shrink-0 mt-1" />
               <div className="flex-grow mt-4 md:mt-0">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
                 <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
-                <a
-                  href={doc.url}
-                  download={doc.filename}
-                  className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
-                  target="_blank" // Abrir en nueva pestaña
-                  rel="noopener noreferrer"
-                >
-                  <Download size={16} />
-                  <span>Descargar PDF</span>
-                </a>
+                
+                {/* Botones de Previsualización y Descarga */}
+                <div className="flex space-x-3 mt-3">
+                    <button
+                        onClick={() => handlePreview(doc)}
+                        className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
+                    >
+                        <Globe size={16} />
+                        <span>Ver Previsualización</span>
+                    </button>
+                    <a
+                        href={doc.url}
+                        download={doc.filename}
+                        className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
+                    >
+                        <Download size={16} />
+                        <span>Descargar PDF</span>
+                    </a>
+                </div>
               </div>
             </div>
           ))}
         </div>
       </div>
+      
+      {/* El modal se renderiza al final de la sección y utiliza el estado */}
+      <PDFPreviewModal doc={previewDoc} onClose={handleClosePreview} />
     </section>
   );
 };
@@ -300,7 +371,7 @@ const ProjectsSection = () => {
     <section id="proyectos" className="py-16 md:py-24 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Casos de Éxito Reales</h2>
-        <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+        <p className="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">
           Demostramos nuestro impacto con proyectos reales que transforman el consumo energético. Más de 100 instalaciones rurales sin energía de red.
         </p>
 
@@ -309,9 +380,9 @@ const ProjectsSection = () => {
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
               <img src={project.img} alt={project.title} className="w-full h-48 object-cover" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x250/0FE778/000?text=Imagen+No+Disponible'; }} />
               <div className="p-6">
-                <p className="text-sm font-semibold text-techno-green uppercase mb-1">{project.sector} - {project.location}</p>
+                <p className="text-sm font-semibold text-green-500 uppercase mb-1">{project.sector} - {project.location}</p>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                <a href="#" className="text-techno-green font-medium hover:underline text-sm flex items-center">
+                <a href="#" className="text-green-500 font-medium hover:underline text-sm flex items-center">
                   Ver caso completo <ChevronRight size={16} />
                 </a>
               </div>
@@ -323,7 +394,7 @@ const ProjectsSection = () => {
   );
 };
 
-// Sección Quiénes Somos (About Us) - Ampliada con Misión, Visión y Valores
+// Sección Quiénes Somos (About Us)
 const AboutSection = () => {
   const values = [
     { title: 'Honestidad', description: 'Compromiso con la verdad, la transparencia y la confianza en cada propuesta.' },
@@ -356,7 +427,7 @@ const AboutSection = () => {
           {/* Placeholder de imagen o video */}
           <div className="rounded-xl overflow-hidden shadow-2xl">
             <img 
-              src={`https://placehold.co/600x400/000/0FE778?text=Visión+y+Misión`}
+              src={VisionMision}
               alt="Equipo de TecnoGen"
               className="w-full h-full object-cover"
               onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/000/0FE778?text=Nuestra+Historia'; }}
@@ -373,7 +444,7 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {values.map((value, index) => (
               <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-                <CheckCircle size={32} className="text-techno-green mb-3" />
+               <CheckCircle size={32} className="text-green-500 mb-3" />
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h4>
                 <p className="text-sm text-gray-700">{value.description}</p>
               </div>
@@ -394,7 +465,7 @@ const ContactSection = () => (
       <p className="text-xl font-medium mb-8 max-w-3xl mx-auto">
         Transformamos la forma en que accedes a la energía, ofreciendo alternativas limpias, accesibles y confiables.
       </p>
-      <PrimaryButton className="bg-white text-gray-900 hover:bg-gray-100">
+      <PrimaryButton className="bg-green-500 text-gray-900 hover:bg-gray-100 m-auto">
         Agenda una Consulta Gratuita
       </PrimaryButton>
     </div>
@@ -410,14 +481,14 @@ const Footer = () => (
         <div>
           <a href="#" className="flex items-center text-2xl font-bold mb-3">
           <img src={Logo} alt="Logo Tecnogen" width="40px"/>
-            Techno<span className="text-techno-green" color='#0FE778'>Gen</span>
+            Techno<span className="text-green-500" color='#0FE778'>Gen</span>
           </a>
           <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
         </div>
 
         {/* Columna 2: Enlaces Rápidos */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-techno-green">Enlaces</h4>
+          <h4 className="text-lg font-semibold mb-4 text-green-500">Enlaces</h4>
           <ul className="space-y-2"> 
             {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
               <li key={item}>
@@ -431,7 +502,7 @@ const Footer = () => (
 
         {/* Columna 3: Contacto */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-techno-green">Contacto</h4>
+          <h4 className="text-lg font-semibold mb-4 text-green-500">Contacto</h4>
           <ul className="space-y-2 text-sm text-gray-400">
             <li>Email: info@tecnogen.com</li>
             <li>Tel: +54 9 11 XXXX-XXXX</li>
@@ -441,16 +512,16 @@ const Footer = () => (
 
         {/* Columna 4: Legal y Redes */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-techno-green">Legal & Redes</h4>
+          <h4 className="text-lg font-semibold mb-4 text-green-500">Legal & Redes</h4>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
           </ul>
           {/* Social Icons Placeholder */}
           <div className="flex space-x-4 mt-4">
-            <Globe size={20} className="text-gray-400 hover:text-techno-green cursor-pointer" />
-            <Users size={20} className="text-gray-400 hover:text-techno-green cursor-pointer" />
-            <TrendingUp size={20} className="text-gray-400 hover:text-techno-green cursor-pointer" />
+            <Globe size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
+            <Users size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
+            <TrendingUp size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
           </div>
         </div>
       </div>
@@ -464,7 +535,6 @@ const Footer = () => (
 
 // --- Componente Principal ---
 export default function App() {
-  // Nota: Asegúrate de que tu `src/index.css` contenga las directivas de Tailwind y la configuración del color 'techno-green'.
   return (
     <div className="min-h-screen font-sans">
       <Header />
