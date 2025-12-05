@@ -1,9 +1,21 @@
-import React, { useState } from 'react'; // Importamos useState
-// Importamos los iconos necesarios, incluyendo Menu y X para el toggle
-import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X } from 'lucide-react';
+import React, { useState } from 'react';
+// Importamos los iconos necesarios, incluyendo Menu, X, CheckCircle, y Download
+import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download } from 'lucide-react';
 import Logo from "../src/assets/tecnogen.png"
 import VideoSolar from "../src/assets/SolarEnergy.mp4"
 import MobileHeroImg from "../src/assets/HeroMobile.jpg"
+
+// -------------------------------------------------------------------
+// 1. IMPORTACIÓN DE LOS ARCHIVOS PDF (¡CAMBIOS APLICADOS AQUÍ!)
+//    Utilizamos las rutas que nos has proporcionado.
+// -------------------------------------------------------------------
+
+import CatalogGeneralPDF from "./assets/pdfs/Group 410_merged.pdf";
+import HanduroPumpsPDF from "./assets/pdfs/HANDURO-solar water pump catalog (1).pdf";
+import TermotanqueDatasheetPDF from "./assets/pdfs/Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300  Galv. ver 2.01.pdf";
+import InverterDatasheetPDF from "./assets/pdfs/datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf";
+
+
 // URL del video de fondo. ¡Reemplaza con tu propio video!
 const DEFAULT_VIDEO_URL = VideoSolar; // Placeholder
 // Color primario de la marca TechnoGen (el verde vibrante)
@@ -23,29 +35,9 @@ const PrimaryButton = ({ children, className = '' }) => (
       ${className}
     `}
   >
-    {/* ANTES: <span>{children}</span>
-      AHORA: Envolvemos los children con un div/span que también sea flex 
-      para asegurar que el icono y el texto estén en línea.
-    */}
     <span className="flex items-center space-x-1"> 
       {children}
     </span>
-    <ChevronRight size={18} />
-  </button>
-);
-
-const SecondaryButton = ({ children, className = '' }) => (
-  <button
-    // Las clases se mantienen como string para Tailwind
-    className={`
-      bg-techno-green text-gray-900 font-semibold py-3 px-8 
-      rounded-full shadow-lg hover:bg-opacity-90 
-      transition duration-300 ease-in-out transform hover:scale-[1.02]
-      flex items-center justify-center space-x-2 
-      ${className}
-    `}
-  >
-    <span>{children}</span>
     <ChevronRight size={18} />
   </button>
 );
@@ -54,7 +46,8 @@ const SecondaryButton = ({ children, className = '' }) => (
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   
-  const navItems = ['Soluciones', 'Proyectos', 'Nosotros', 'Contacto'];
+  // Se añade 'Documentación' a los ítems de navegación
+  const navItems = ['Soluciones', 'Documentación', 'Proyectos', 'Nosotros', 'Contacto'];
 
   // Función para cerrar el menú al hacer clic en un enlace (útil en móvil)
   const handleNavLinkClick = () => {
@@ -76,7 +69,7 @@ const Header = () => {
           {navItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`#${item.toLowerCase().replace('ó', 'o')}`} // Manejo de tildes para IDs
               className="text-gray-600 hover:text-techno-green transition duration-150"
             >
               {item}
@@ -116,7 +109,7 @@ const Header = () => {
           {navItems.map((item) => (
             <a
               key={item}
-              href={`#${item.toLowerCase()}`}
+              href={`#${item.toLowerCase().replace('ó', 'o')}`}
               onClick={handleNavLinkClick} // Cierra el menú al hacer clic
               className="block py-2 text-gray-700 hover:bg-gray-200 rounded-md transition duration-150"
             >
@@ -165,10 +158,10 @@ const HeroSection = () => (
     
     <div className="relative z-10 text-white p-6 max-w-4xl">
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4">
-        El Futuro es Verde. El Futuro es <span className="text-techno-green">TechnoGen</span>.
+        Transformamos Energía. <span className="text-techno-green">Transformamos el Futuro.</span>
       </h1>
       <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto">
-        Lideramos la transición energética con soluciones solares, eólicas y de eficiencia para un mañana sostenible.
+        Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6">
         <PrimaryButton className="text-lg bg-green-500">
@@ -212,31 +205,64 @@ const ServicesSection = () => {
   );
 };
 
-// Sección de Proyectos Destacados (Similar a Portfolio)
-const ProjectsSection = () => {
-  const projects = [
-    { title: 'Planta Industrial Solar', sector: 'Manufactura', img: 'https://placehold.co/400x250/0FE778/000?text=Proyecto+Industrial' },
-    { title: 'Auditoría Residencial', sector: 'Hogares Inteligentes', img: 'https://placehold.co/400x250/0FE778/000?text=Proyecto+Residencial' },
-    { title: 'Parque Eólico Costa', sector: 'Energía Eólica', img: 'https://placehold.co/400x250/0FE778/000?text=Proyecto+Eólico' },
+// SECCIÓN: Documentación y Catálogos (¡Con URLs de archivos actualizadas!)
+const CatalogsSection = () => {
+  // Datos de los documentos proporcionados por el usuario
+  const documents = [
+    { 
+      title: 'Catálogo General de Soluciones', 
+      description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
+      filename: 'Group 410_merged.pdf',
+      url: CatalogGeneralPDF, // << URL REAL DEL ARCHIVO >>
+      icon: Leaf 
+    },
+    { 
+      title: 'Bombas de Agua Solares (HANDURO)', 
+      description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
+      filename: 'HANDURO-solar water pump catalog (1).pdf',
+      url: HanduroPumpsPDF, // << URL REAL DEL ARCHIVO >>
+      icon: Zap
+    },
+    { 
+      title: 'Ficha Técnica Termotanque Solar', 
+      description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
+      filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
+      url: TermotanqueDatasheetPDF, // << URL REAL DEL ARCHIVO >>
+      icon: Globe 
+    },
+    { 
+      title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
+      description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
+      filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
+      url: InverterDatasheetPDF, // << URL REAL DEL ARCHIVO >>
+      icon: TrendingUp 
+    },
   ];
 
   return (
-    <section id="proyectos" className="py-16 md:py-24 bg-gray-100">
+    <section id="documentacion" className="py-16 md:py-24 bg-gray-100">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Casos de Éxito</h2>
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Documentación y Recursos Técnicos</h2>
         <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          Demostramos nuestro impacto con proyectos reales que transforman el consumo energético.
+          Descargue nuestros catálogos y fichas técnicas actualizadas para conocer en detalle las especificaciones de nuestros productos.
         </p>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
-              <img src={project.img} alt={project.title} className="w-full h-48 object-cover" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x250/0FE778/000?text=Imagen+No+Disponible'; }} />
-              <div className="p-6">
-                <p className="text-sm font-semibold text-techno-green uppercase mb-1">{project.sector}</p>
-                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                <a href="#" className="text-techno-green font-medium hover:underline text-sm flex items-center">
-                  Ver detalles <ChevronRight size={16} />
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {documents.map((doc, index) => (
+            <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
+              <doc.icon size={36} className="text-techno-green mr-4 flex-shrink-0 mt-1" />
+              <div className="flex-grow mt-4 md:mt-0">
+                <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
+                <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
+                <a
+                  href={doc.url}
+                  download={doc.filename}
+                  className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
+                  target="_blank" // Abrir en nueva pestaña
+                  rel="noopener noreferrer"
+                >
+                  <Download size={16} />
+                  <span>Descargar PDF</span>
                 </a>
               </div>
             </div>
@@ -247,37 +273,118 @@ const ProjectsSection = () => {
   );
 };
 
-// Sección Quiénes Somos (About Us)
-const AboutSection = () => (
-  <section id="nosotros" className="py-16 md:py-24 bg-white">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">Sobre TecnoGen</h2>
-          <p className="text-lg text-gray-700 mb-4">
-            Nacimos de la visión de un futuro 100% renovable. TecnoGen combina la **innovación tecnológica** con el compromiso ambiental para ofrecer soluciones de energía limpia que son accesibles y rentables.
-          </p>
-          <p className="text-lg text-gray-700 mb-6">
-            Nuestra experiencia abarca desde pequeñas instalaciones residenciales hasta proyectos industriales a gran escala, siempre priorizando la calidad, la seguridad y la maximización del retorno de inversión para nuestros clientes.
-          </p>
-          <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
-            Conoce a nuestro equipo
-          </PrimaryButton>
-        </div>
-        
-        {/* Placeholder de imagen o video */}
-        <div className="rounded-xl overflow-hidden shadow-2xl">
-          <img 
-            src={`https://placehold.co/600x400/000/0FE778?text=Visión+y+Misión`}
-            alt="Equipo de TecnoGen"
-            className="w-full h-full object-cover"
-            onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/000/0FE778?text=Nuestra+Historia'; }}
-          />
+// Sección de Proyectos Destacados (Similar a Portfolio)
+const ProjectsSection = () => {
+  const projects = [
+    { 
+      title: 'Cooperativa Rural ALFA', 
+      sector: 'Planta de Acopio', 
+      location: 'Tres Arroyos', 
+      img: 'https://placehold.co/400x250/0FE778/000?text=Planta+Rural+ALFA' 
+    }, 
+    { 
+      title: 'Sistema Solar para Riego Agrícola', 
+      sector: 'Agro (Riego)', 
+      location: 'Pehuencó', 
+      img: 'https://placehold.co/400x250/0FE778/000?text=Riego+Agrícola' 
+    }, 
+    { 
+      title: 'Instalación Fotovoltaica en Nogales', 
+      sector: 'Agro (Plantación)', 
+      location: 'Choele Choel', 
+      img: 'https://placehold.co/400x250/0FE778/000?text=Plantación+de+Nogales' 
+    }, 
+  ];
+
+  return (
+    <section id="proyectos" className="py-16 md:py-24 bg-gray-100">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Casos de Éxito Reales</h2>
+        <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+          Demostramos nuestro impacto con proyectos reales que transforman el consumo energético. Más de 100 instalaciones rurales sin energía de red.
+        </p>
+
+        <div className="grid md:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
+              <img src={project.img} alt={project.title} className="w-full h-48 object-cover" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x250/0FE778/000?text=Imagen+No+Disponible'; }} />
+              <div className="p-6">
+                <p className="text-sm font-semibold text-techno-green uppercase mb-1">{project.sector} - {project.location}</p>
+                <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
+                <a href="#" className="text-techno-green font-medium hover:underline text-sm flex items-center">
+                  Ver caso completo <ChevronRight size={16} />
+                </a>
+              </div>
+            </div>
+          ))}
         </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
+
+// Sección Quiénes Somos (About Us) - Ampliada con Misión, Visión y Valores
+const AboutSection = () => {
+  const values = [
+    { title: 'Honestidad', description: 'Compromiso con la verdad, la transparencia y la confianza en cada propuesta.' },
+    { title: 'Vocación de Servicio', description: 'Acompañamos cada etapa del proyecto con cercanía y dedicación.' },
+    { title: 'Eficiencia', description: 'Optimizamos recursos y tecnologías para garantizar el máximo rendimiento.' },
+    { title: 'Sustentabilidad', description: 'Impulsamos una energía que cuida lo que nos rodea, promoviendo un uso responsable.' },
+  ];
+
+  return (
+    <section id="nosotros" className="py-16 md:py-24 bg-white">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        
+        <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
+          <div>
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestra Historia y Misión</h2>
+            <p className="text-lg text-gray-700 mb-4">
+              Desde **2013**, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las **energías renovables**, incorporando sistemas solares fotovoltaicos.
+            </p>
+            <p className="text-lg text-gray-700 mb-6 font-semibold border-l-4 border-techno-green pl-4 italic">
+              **Misión:** Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
+            </p>
+            <p className="text-lg text-gray-700 mb-6">
+              **Visión:** Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
+            </p>
+            <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
+              Conoce nuestro Propósito
+            </PrimaryButton>
+          </div>
+          
+          {/* Placeholder de imagen o video */}
+          <div className="rounded-xl overflow-hidden shadow-2xl">
+            <img 
+              src={`https://placehold.co/600x400/000/0FE778?text=Visión+y+Misión`}
+              alt="Equipo de TecnoGen"
+              className="w-full h-full object-cover"
+              onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/600x400/000/0FE778?text=Nuestra+Historia'; }}
+            />
+          </div>
+        </div>
+        
+        {/* Sección de Valores */}
+        <div className="mt-16 pt-12 border-t border-gray-200">
+          <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Nuestros Valores Fundamentales</h3>
+          <p className="text-center text-lg text-gray-600 mb-10">
+            Nuestro trabajo se basa en llevar energía limpia a donde se necesita, con honestidad, compromiso y excelencia técnica.
+          </p>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {values.map((value, index) => (
+              <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
+                <CheckCircle size={32} className="text-techno-green mb-3" />
+                <h4 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h4>
+                <p className="text-sm text-gray-700">{value.description}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+
+      </div>
+    </section>
+  );
+};
 
 // Sección de Contacto y CTA final
 const ContactSection = () => (
@@ -285,7 +392,7 @@ const ContactSection = () => (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
       <h2 className="text-4xl font-bold mb-4">¿Listo para unirte a la Revolución Verde?</h2>
       <p className="text-xl font-medium mb-8 max-w-3xl mx-auto">
-        Nuestro equipo de expertos está listo para diseñar tu solución energética personalizada.
+        Transformamos la forma en que accedes a la energía, ofreciendo alternativas limpias, accesibles y confiables.
       </p>
       <PrimaryButton className="bg-white text-gray-900 hover:bg-gray-100">
         Agenda una Consulta Gratuita
@@ -312,9 +419,9 @@ const Footer = () => (
         <div>
           <h4 className="text-lg font-semibold mb-4 text-techno-green">Enlaces</h4>
           <ul className="space-y-2"> 
-            {['Inicio', 'Soluciones', 'Proyectos', 'Nosotros'].map((item) => (
+            {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
               <li key={item}>
-                <a href={`#${item.toLowerCase()}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
+                <a href={`#${item.toLowerCase().replace('ó', 'o')}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
                   {item}
                 </a>
               </li>
@@ -335,7 +442,6 @@ const Footer = () => (
         {/* Columna 4: Legal y Redes */}
         <div>
           <h4 className="text-lg font-semibold mb-4 text-techno-green">Legal & Redes</h4>
-          {/* El error se manifestaba en el UL. Aseguramos sintaxis limpia. */}
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
@@ -365,8 +471,9 @@ export default function App() {
       <main>
         <HeroSection />
         <ServicesSection />
-        <AboutSection />
+        <CatalogsSection /> 
         <ProjectsSection />
+        <AboutSection />
         <ContactSection />
       </main>
       <Footer />
