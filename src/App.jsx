@@ -524,9 +524,9 @@ const AboutSection = () => {
             <p className="text-lg text-gray-50 mb-6">
               <b>Visión:</b> Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
             </p>
-            <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
+            {/* <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
               Conoce nuestro Propósito
-            </PrimaryButton>
+            </PrimaryButton> */}
           </div>
 
           {/* Placeholder de imagen o video */}
