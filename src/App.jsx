@@ -1,4 +1,5 @@
 import React, { useState, useEffect} from 'react';
+import './App.css';	
 // Importamos los iconos necesarios
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download, Battery, Power, PlugZap, Lightbulb, CloudOff, RefreshCw } from 'lucide-react';
 import Logo from "../src/assets/LogoFB.png"
@@ -193,7 +194,7 @@ const ServicesSection = () => {
   ];
 
   return (
-    <section id="soluciones" className="py-16 md:py-24 bg-white">
+    <section id="soluciones" className="py-16 md:py-24 bg-white curved-separator">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Nuestros Sistemas Energéticos</h2>
         <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
@@ -202,7 +203,7 @@ const ServicesSection = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 hover:shadow-2xl">
+            <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 hover:shadow-2xl z-20">
               <service.icon size={48} className="text-[#2A9D8F] mb-4" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">{service.title}</h3>
               <p className="text-gray-700">{service.description}</p>
@@ -315,115 +316,123 @@ const PDFPreviewModal = ({ doc, onClose }) => {
 };
 
 
-// SECCIÓN: Documentación y Catálogos (Sin cambios)
+
+// SECCIÓN: Documentación y Catálogos (Corregido con Separador CSS)
 const CatalogsSection = () => {
-    // Estado para controlar qué documento se previsualiza
-    const [previewDoc, setPreviewDoc] = useState(null);
+  // Estado para controlar qué documento se previsualiza
+  const [previewDoc, setPreviewDoc] = useState(null);
 
-    const handlePreview = (doc) => {
-        setPreviewDoc(doc);
-    };
+  const handlePreview = (doc) => {
+      setPreviewDoc(doc);
+  };
 
-    const handleClosePreview = () => {
-        setPreviewDoc(null);
-    };
+  const handleClosePreview = () => {
+      setPreviewDoc(null);
+  };
 
-    // Datos de los documentos proporcionados por el usuario
-    const documents = [
-        { 
-            title: 'Catálogo General de Soluciones', 
-            description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
-            filename: 'Group 410_merged.pdf',
-            url: CatalogGeneralPDF, 
-            icon: Leaf 
-        },
-        { 
-            title: 'Bombas de Agua Solares (HANDURO)', 
-            description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
-            filename: 'HANDURO-solar water pump catalog (1).pdf',
-            url: HanduroPumpsPDF, 
-            icon: Zap
-        },
-        { 
-            title: 'Ficha Técnica Termotanque Solar', 
-            description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
-            filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
-            url: TermotanqueDatasheetPDF, 
-            icon: Globe 
-        },
-        { 
-            title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
-            description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
-            filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
-            url: InverterDatasheetPDF, 
-            icon: TrendingUp 
-        },
-        { 
-          title: 'Hoja de Datos Batería Hope 5.0L-B1', 
-          description: 'Especificaciones técnicas de la batería LiFePO4 de alta densidad para almacenamiento de energía solar.',
-          filename: 'Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf',
-          url: Hope5DatasheetPDF, 
-          icon: Battery 
+  // Datos de los documentos proporcionados por el usuario
+  const documents = [
+      { 
+          title: 'Catálogo General de Soluciones', 
+          description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
+          filename: 'Group 410_merged.pdf',
+          url: CatalogGeneralPDF, 
+          icon: Leaf 
       },
       { 
-          title: 'Datasheet Inversor MID 17-30KTL3-X2', 
-          description: 'Ficha técnica del inversor trifásico on-grid para aplicaciones comerciales e industriales.',
-          filename: 'MID_17-30KTL3-X2_Datasheet_EN_202411.pdf',
-          url: MID1730KTL3X2DatasheetPDF, 
-          icon: PlugZap 
+          title: 'Bombas de Agua Solares (HANDURO)', 
+          description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
+          filename: 'HANDURO-solar water pump catalog (1).pdf',
+          url: HanduroPumpsPDF, 
+          icon: Zap
       },
       { 
-          title: 'Datasheet Inversor SPF 6000 ES Plus', 
-          description: 'Detalles técnicos del inversor off-grid con soporte para paneles solares, baterías y operación en paralelo.',
-          filename: 'SPF6000ES DATASHEET.pdf',
-          url: SPF6000DatasheetPDF, 
-          icon: Power 
-      }
-    ];
+          title: 'Ficha Técnica Termotanque Solar', 
+          description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
+          filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
+          url: TermotanqueDatasheetPDF, 
+          icon: Globe 
+      },
+      { 
+          title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
+          description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
+          filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
+          url: InverterDatasheetPDF, 
+          icon: TrendingUp 
+      },
+      { 
+        title: 'Hoja de Datos Batería Hope 5.0L-B1', 
+        description: 'Especificaciones técnicas de la batería LiFePO4 de alta densidad para almacenamiento de energía solar.',
+        filename: 'Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf',
+        url: Hope5DatasheetPDF, 
+        icon: Battery 
+    },
+    { 
+        title: 'Datasheet Inversor MID 17-30KTL3-X2', 
+        description: 'Ficha técnica del inversor trifásico on-grid para aplicaciones comerciales e industriales.',
+        filename: 'MID_17-30KTL3-X2_Datasheet_EN_202411.pdf',
+        url: MID1730KTL3X2DatasheetPDF, 
+        icon: PlugZap 
+    },
+    { 
+        title: 'Datasheet Inversor SPF 6000 ES Plus', 
+        description: 'Detalles técnicos del inversor off-grid con soporte para paneles solares, baterías y operación en paralelo.',
+        filename: 'SPF6000ES DATASHEET.pdf',
+        url: SPF6000DatasheetPDF, 
+        icon: Power 
+    }
+  ];
 
   return (
-    <section id="documentacion" className="py-16 md:py-24 bg-gray-100">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Documentación y Recursos Técnicos</h2>
-        <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
-        </p>
+      // CAMBIOS CLAVE:
+      // 1. Se mantiene 'relative' y la clase 'curved-separator'.
+      // 2. Se usa 'md:pb-[100px]' para crear un espacio de 100px en la parte inferior,
+      //    que es exactamente la altura de la curva definida en App.css.
+      <section 
+          id="documentacion" 
+          className="relative   py-16 md:pt-24 md:pb-[100px] bg-gradient-to-b from-[#2A9D8F] to-[#F3F4F6]"
+      >
+          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+              <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Documentación y Recursos Técnicos</h2>
+              <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+                  Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
+              </p>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-          {documents.map((doc, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
-              <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
-              <div className="flex-grow mt-4 md:mt-0">
-                <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
-                <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
-                
-                {/* Botones de Previsualización y Descarga */}
-                <div className="flex space-x-3 mt-3">
-                    <button
-                        onClick={() => handlePreview(doc)}
-                        className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
-                    >
-                        <Globe size={16} />
-                        <span>Ver Previsualización</span>
-                    </button>
-                    <a
-                        href={doc.url}
-                        download={doc.filename}
-                        className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
-                    >
-                        <Download size={16} />
-                        <span>Descargar PDF</span>
-                    </a>
-                </div>
+              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+                  {documents.map((doc, index) => (
+                      <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
+                          <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
+                          <div className="flex-grow mt-4 md:mt-0">
+                              <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
+                              <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
+                              
+                              {/* Botones de Previsualización y Descarga */}
+                              <div className="flex space-x-3 mt-3">
+                                  <button
+                                      onClick={() => handlePreview(doc)}
+                                      className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
+                                  >
+                                      <Globe size={16} />
+                                      <span>Ver Previsualización</span>
+                                  </button>
+                                  <a
+                                      href={doc.url}
+                                      download={doc.filename}
+                                      className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
+                                  >
+                                      <Download size={16} />
+                                      <span>Descargar PDF</span>
+                                  </a>
+                              </div>
+                          </div>
+                      </div>
+                  ))}
               </div>
-            </div>
-          ))}
-        </div>
-      </div>
-      
-      {/* El modal se renderiza al final de la sección y utiliza el estado */}
-      <PDFPreviewModal doc={previewDoc} onClose={handleClosePreview} />
-    </section>
+          </div>
+          
+          {/* El modal se renderiza al final de la sección y utiliza el estado */}
+          <PDFPreviewModal doc={previewDoc} onClose={handleClosePreview} />
+      </section>
   );
 };
 
@@ -452,7 +461,7 @@ const ProjectsSection = () => {
   ];
 
   return (
-    <section id="proyectos" className="py-16 md:py-24 bg-gray-100">
+    <section id="proyectos" className="py-16 md:py-24  bg-gradient-to-b from-[#F3F4F6] to-[#2A9D8F] ">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Casos de Éxito Reales</h2>
         <p className="text-lg text-center text-gray-600 mb-12 max-w-3xl mx-auto">
@@ -492,19 +501,19 @@ const AboutSection = () => {
 
 
   return (
-    <section id="nosotros" className="py-16 md:py-24 bg-white">
+    <section id="nosotros" className="py-16 md:py-24 bg-white curved">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div>
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">Nuestra Historia y Misión</h2>
-            <p className="text-lg text-gray-700 mb-4">
+            <h2 className="text-4xl font-bold text-gray-50 mb-4">Nuestra Historia y Misión</h2>
+            <p className="text-lg text-gray-50 mb-4">
               Desde **2013**, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las **energías renovables**, incorporando sistemas solares fotovoltaicos.
             </p>
-            <p className="text-lg text-gray-700 mb-6 font-semibold border-l-4 border-techno-green pl-4 italic">
+            <p className="text-lg text-gray-50 mb-6 font-semibold border-l-4 border-techno-green pl-4 italic">
               **Misión:** Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
             </p>
-            <p className="text-lg text-gray-700 mb-6">
+            <p className="text-lg text-gray-50 mb-6">
               **Visión:** Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
             </p>
             <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
@@ -525,13 +534,13 @@ const AboutSection = () => {
         
         {/* Sección de Valores */}
         <div className="mt-16 pt-12 border-t border-gray-200">
-          <h3 className="text-3xl font-bold text-center text-gray-900 mb-8">Nuestros Valores Fundamentales</h3>
-          <p className="text-center text-lg text-gray-600 mb-10">
+          <h3 className="text-3xl font-bold text-center text-gray-50 mb-8">Nuestros Valores Fundamentales</h3>
+          <p className="text-center text-lg text-gray-50 mb-10">
             Nuestro trabajo se basa en llevar energía limpia a donde se necesita, con honestidad, compromiso y excelencia técnica.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {displayedValues.map((value, index) => (
-              <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
+              <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg border-2 border-[#2A9D8F]">
                <CheckCircle size={32} className="text-[#2A9D8F] mb-3" />
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h4>
                 <p className="text-sm text-gray-700">{value.description}</p>
