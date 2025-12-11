@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect} from 'react';
 // Importamos los iconos necesarios
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download } from 'lucide-react';
 import Logo from "../src/assets/tecnogen.png"
@@ -207,47 +207,97 @@ const ServicesSection = () => {
 
 // COMPONENTE MODAL DE PREVISUALIZACIÓN DE PDF
 const PDFPreviewModal = ({ doc, onClose }) => {
+  const [pdfUrl, setPdfUrl] = useState(null);
+
+  useEffect(() => {
+    if (!doc || !doc.url) {
+      setPdfUrl(null);
+      return;
+    }
+
+    // Si ya es una blob URL o data URL, úsala directamente
+    if (typeof doc.url === 'string' && (doc.url.startsWith('blob:') || doc.url.startsWith('data:'))) {
+      setPdfUrl(doc.url);
+      return;
+    }
+
+    // Caso: es un archivo importado (objeto File o URL estática)
+    fetch(doc.url)
+      .then(res => res.blob())
+      .then(blob => {
+        const blobUrl = URL.createObjectURL(blob);
+        setPdfUrl(blobUrl);
+      })
+      .catch(err => {
+        console.error("Error cargando PDF:", err);
+        setPdfUrl(null);
+      });
+
+    // Limpieza: revocar la URL cuando se cierre
+    return () => {
+      if (pdfUrl && pdfUrl.startsWith('blob:')) {
+        URL.revokeObjectURL(pdfUrl);
+      }
+    };
+  }, [doc]);
+
   if (!doc) return null;
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-75 p-4" onClick={onClose}>
       <div 
-        className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col" 
+        className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col relative"
         onClick={(e) => e.stopPropagation()}
       >
-        <div className="p-4 border-b flex justify-between items-center flex-shrink-0 bg-gray-50">
-          <h3 className="text-xl font-semibold text-gray-900">
-            {doc.title} - Previsualización
+        {/* Header */}
+        <div className="p-4 border-b flex justify-between items-center bg-gray-50 flex-shrink-0">
+          <h3 className="text-xl font-semibold text-gray-900 truncate">
+            {doc.title}
           </h3>
           <button 
-            onClick={onClose} 
+            onClick={onClose}
             className="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-200 transition"
           >
-            <X size={24} />
+            X
           </button>
         </div>
 
-        <div className="flex-grow bg-gray-100">
-          <object
-            data={`${doc.url}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
-            type="application/pdf"
-            width="100%"
-            height="100%"
-          >
-            <embed
-              src={`${doc.url}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
+        {/* PDF Viewer */}
+        <div className="flex-grow bg-gray-100 relative overflow-hidden">
+          {pdfUrl ? (
+            <object
+              data={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
               type="application/pdf"
               width="100%"
               height="100%"
-            />
-          </object>
+              className="absolute inset-0"
+            >
+              <embed
+                src={`${pdfUrl}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
+                type="application/pdf"
+                width="100%"
+                height="100%"
+              />
+            </object>
+          ) : (
+            <div className="flex items-center justify-center h-full">
+              <div className="text-center">
+                <div className="inline-block animate-spin rounded-full h-12 w-12 border-4 border-green-500 border-t-transparent mb-4"></div>
+                <p className="text-gray-600">Cargando documento...</p>
+              </div>
+            </div>
+          )}
         </div>
 
-        {/* Fallback visible si todo falla */}
-        <div className="p-4 bg-gray-800 text-white text-center">
-          No se puede mostrar el PDF. 
-          <a href={doc.url} download={doc.filename} className="ml-2 underline hover:text-green-400">
-            → Descargar ahora
+        {/* Fallback permanente */}
+        <div className="p-4 bg-gray-800 text-white text-center text-sm">
+          ¿No puedes ver el PDF?{' '}
+          <a 
+            href={doc.url} 
+            download={doc.filename}
+            className="underline hover:text-green-400 font-medium"
+          >
+            Descargar {doc.title}
           </a>
         </div>
       </div>
