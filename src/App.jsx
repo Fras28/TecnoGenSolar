@@ -52,7 +52,7 @@ const PrimaryButton = ({ children, className = '' }) => (
 // Sección de Cabecera (Header)
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
+  const TELEFONO_CONTACTO = "+5492915331739";
   const navItems = ['Soluciones', 'Documentación', 'Proyectos', 'Nosotros', 'Contacto'];
 
   const handleNavLinkClick = () => {
@@ -82,13 +82,17 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* CTA de Contacto (Solo Desktop/Tablet) */}
         <div className="hidden md:block">
-          <PrimaryButton className="py-2 px-6 flex ">
+    {/* Se envuelve el PrimaryButton en un enlace <a> con 'tel:' 
+        para habilitar el marcado automático en dispositivos compatibles.
+    */}
+    <a href={`tel:${TELEFONO_CONTACTO}`}>
+        <PrimaryButton className="py-2 px-6 flex ">
             <Phone size={18} className="mr-1" />
             Hablemos
-          </PrimaryButton>
-        </div>
+        </PrimaryButton>
+    </a>
+</div>
 
         {/* Menú Móvil (Icono Toggle) */}
         <div className="md:hidden">
@@ -510,7 +514,7 @@ const AboutSection = () => {
             <p className="text-lg text-gray-50 mb-4">
               Desde <b>2013</b>, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las <b>energías renovables</b>, incorporando sistemas solares fotovoltaicos.
             </p>
-            <p className="text-lg text-gray-50 mb-6 font-semibold border-l-4 border-techno-green pl-4 italic">
+            <p className="text-lg text-gray-50 mb-6 border-l-4 border-techno-green pl-4 italic">
               <b>Misión:</b> Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
             </p>
             <p className="text-lg text-gray-50 mb-6">
@@ -569,65 +573,78 @@ const ContactSection = () => (
   </section>
 );
 
-// Pie de Página (Footer) (Sin cambios)
+// Pie de Página (Footer) (Con enlace de WhatsApp)
 const Footer = () => (
-  <footer className="bg-gray-900 text-white py-12">
-    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="grid md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
-        {/* Columna 1: Logo y Misión */}
-        <div>
-          <a href="#" className="flex items-center text-2xl font-bold mb-3">
-          <img src={LogoFO} alt="Logo Tecnogen" width="200px"/>
-          </a>
-          <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
-        </div>
-
-        {/* Columna 2: Enlaces Rápidos */}
-        <div>
-          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Enlaces</h4>
-          <ul className="space-y-2"> 
-            {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
-              <li key={item}>
-                <a href={`#${item.toLowerCase().replace('ó', 'o')}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
-                  {item}
-                </a>
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        {/* Columna 3: Contacto */}
-        <div>
-          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
-          <ul className="space-y-2 text-sm text-gray-400">
-            <li>Email: info@tecnogen.com</li>
-            <li>Tel: +54 9 11 XXXX-XXXX</li>
-            <li>Dirección: Calle Falsa 123, CABA, Argentina</li>
-          </ul>
-        </div>
-
-        {/* Columna 4: Legal y Redes */}
-        <div>
-          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Legal & Redes</h4>
-          <ul className="space-y-2 text-sm">
-            <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
-            <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
-          </ul>
-          {/* Social Icons Placeholder */}
-          <div className="flex space-x-4 mt-4">
-            <Globe size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-            <Users size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-            <TrendingUp size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-          </div>
-        </div>
-      </div>
-
-      <div className="text-center text-sm text-gray-500 pt-4">
-        © {new Date().getFullYear()} TecnoGen. Todos los derechos reservados.
-      </div>
-    </div>
-  </footer>
-);
+    <footer className="bg-gray-900 text-white py-12">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
+          {/* Columna 1: Logo y Misión */}
+          <div>
+            <a href="#" className="flex items-center text-2xl font-bold mb-3">
+            <img src={LogoFO} alt="Logo Tecnogen" width="200px"/>
+            </a>
+            <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
+          </div>
+  
+          {/* Columna 2: Enlaces Rápidos */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Enlaces</h4>
+            <ul className="space-y-2"> 
+              {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
+                <li key={item}>
+                  <a href={`#${item.toLowerCase().replace('ó', 'o')}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
+                    {item}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+  
+          {/* Columna 3: Contacto */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
+            <ul className="space-y-2 text-sm text-gray-400">
+              <li>Email: info@tecnogen.com</li>
+              <li>Tel: +5492915331739</li>
+                  {/* Nuevo elemento para WhatsApp */}
+              <li>
+                <a 
+                  href="https://wa.me/+5492915331739?text=Hola!%20quiero%20que%20me%20asesoren.%20" 
+                  className="text-gray-400 hover:text-[#25D366] transition duration-150  items-center"
+                  target="_blank" 
+                  rel="noopener noreferrer"
+                >
+                  {/* Si tienes un ícono de WhatsApp (ej. de 'lucide-react') lo puedes añadir aquí. */}
+                  {/* Por ahora, solo texto: */}
+                  Chatea con nosotros (WhatsApp)
+                </a>
+              </li>
+              <li>Dirección: Calle Falsa 123, CABA, Argentina</li>
+            </ul>
+          </div>
+  
+          {/* Columna 4: Legal y Redes */}
+          <div>
+            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Legal & Redes</h4>
+            <ul className="space-y-2 text-sm">
+              <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
+              <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
+            </ul>
+            {/* Social Icons Placeholder */}
+            <div className="flex space-x-4 mt-4">
+              <Globe size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+              <Users size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+              <TrendingUp size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+            </div>
+          </div>
+        </div>
+  
+        <div className="text-center text-sm text-gray-500 pt-4">
+          © {new Date().getFullYear()} TecnoGen. Todos los derechos reservados.
+        </div>
+      </div>
+    </footer>
+  );
 
 // --- Componente Principal ---
 export default function App() {
