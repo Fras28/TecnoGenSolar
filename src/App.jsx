@@ -1,5 +1,5 @@
-import React, { useState, useEffect} from 'react';
-import './App.css';	
+import React, { useState, useEffect } from 'react';
+import './App.css';
 // Importamos los iconos necesarios
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download, Battery, Power, PlugZap, Lightbulb, CloudOff, RefreshCw } from 'lucide-react';
 import Logo from "../src/assets/LogoFB.png"
@@ -42,7 +42,7 @@ const PrimaryButton = ({ children, className = '' }) => (
       ${className}
     `}
   >
-    <span className="flex items-center space-x-1"> 
+    <span className="flex items-center space-x-1">
       {children}
     </span>
     <ChevronRight size={18} />
@@ -62,11 +62,11 @@ const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
-        
+
         {/* Logo */}
         <a href="#" className="flex items-center text-2xl font-bold text-gray-900">
-         <img src={Logo} alt="Logo Tecnogen" width="180px"/>
-   
+          <img src={Logo} alt="Logo Tecnogen" width="180px" />
+
         </a>
 
         {/* Navegación (Solo Desktop/Tablet) */}
@@ -83,20 +83,20 @@ const Header = () => {
         </nav>
 
         <div className="hidden md:block">
-    {/* Se envuelve el PrimaryButton en un enlace <a> con 'tel:' 
+          {/* Se envuelve el PrimaryButton en un enlace <a> con 'tel:' 
         para habilitar el marcado automático en dispositivos compatibles.
     */}
-    <a href={`tel:${TELEFONO_CONTACTO}`}>
-        <PrimaryButton className="py-2 px-6 flex ">
-            <Phone size={18} className="mr-1" />
-            Hablemos
-        </PrimaryButton>
-    </a>
-</div>
+          <a href={`tel:${TELEFONO_CONTACTO}`}>
+            <PrimaryButton className="py-2 px-6 flex ">
+              <Phone size={18} className="mr-1" />
+              Hablemos
+            </PrimaryButton>
+          </a>
+        </div>
 
         {/* Menú Móvil (Icono Toggle) */}
         <div className="md:hidden">
-          <button 
+          <button
             className="text-gray-900 hover:text-[#2A9D8F] p-2 transition duration-150"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
@@ -108,18 +108,17 @@ const Header = () => {
       </div>
 
       {/* Contenido del Menú Móvil */}
-      <div 
+      <div
         id="mobile-menu"
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
-          isMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
-        } bg-gray-50 border-t border-gray-200`}
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${isMenuOpen ? 'max-h-screen opacity-100 py-4' : 'max-h-0 opacity-0'
+          } bg-gray-50 border-t border-gray-200`}
       >
         <nav className="flex flex-col space-y-2 px-4 font-medium">
           {navItems.map((item) => (
             <a
               key={item}
               href={`#${item.toLowerCase().replace('ó', 'o')}`}
-              onClick={handleNavLinkClick} 
+              onClick={handleNavLinkClick}
               className="block py-2 text-gray-700 hover:bg-gray-200 rounded-md transition duration-150"
             >
               {item}
@@ -128,7 +127,7 @@ const Header = () => {
           <div className="pt-4 pb-2 w-full">
             <PrimaryButton className="w-full bg-[#31AE8A]  ">
               <Phone size={18} className="mr-1" />
-              Hablemos 
+              Hablemos
             </PrimaryButton>
           </div>
         </nav>
@@ -155,18 +154,18 @@ const HeroSection = () => (
     {/* Fallback de Imagen (Solo Móvil) */}
     <div
       className="absolute inset-0 w-full h-full object-cover md:hidden"
-      style={{ 
-        backgroundImage: `url(${MobileHeroImg})`, 
-        backgroundSize: 'cover', 
-        backgroundPosition: 'center' 
+      style={{
+        backgroundImage: `url(${MobileHeroImg})`,
+        backgroundSize: 'cover',
+        backgroundPosition: 'center'
       }}
     ></div>
 
     {/* Overlay para mejor contraste de texto sobre video/imagen */}
     <div className="absolute inset-0 bg-gray-900 opacity-70"></div>
-    
+
     {/* Contenido (Título y Botones) */}
-    <div className="relative z-10 text-white p-6 max-w-4xl w-full"> 
+    <div className="relative z-10 text-white p-6 max-w-4xl w-full">
       <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#2A9D8F] mb-2 uppercase tracking-widest">
         ENERGÍA QUE FLUYE
       </h2>
@@ -178,12 +177,17 @@ const HeroSection = () => (
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
         {/* Botones Full-Width en Mobile (w-full sm:w-auto) */}
-        <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]">
+        <a href="#soluciones">
+            <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]">
           Descubre Soluciones
         </PrimaryButton>
-        <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]" >
-          Contáctanos Hoy
-        </PrimaryButton>
+        </a>
+      
+        <a href="tel:+5492915331739">
+          <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]" >
+            Contáctanos Hoy
+          </PrimaryButton>
+        </a>
       </div>
     </div>
   </section>
@@ -259,7 +263,7 @@ const PDFPreviewModal = ({ doc, onClose }) => {
 
   return (
     <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-75 p-4" onClick={onClose}>
-      <div 
+      <div
         className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col relative"
         onClick={(e) => e.stopPropagation()}
       >
@@ -268,7 +272,7 @@ const PDFPreviewModal = ({ doc, onClose }) => {
           <h3 className="text-xl font-semibold text-gray-900 truncate">
             {doc.title}
           </h3>
-          <button 
+          <button
             onClick={onClose}
             className="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-200 transition"
           >
@@ -306,8 +310,8 @@ const PDFPreviewModal = ({ doc, onClose }) => {
         {/* Fallback permanente */}
         <div className="p-4 bg-gray-800 text-white text-center text-sm">
           ¿No puedes ver el PDF?{' '}
-          <a 
-            href={doc.url} 
+          <a
+            href={doc.url}
             download={doc.filename}
             className="underline hover:text-green-400 font-medium"
           >
@@ -327,141 +331,141 @@ const CatalogsSection = () => {
   const [previewDoc, setPreviewDoc] = useState(null);
 
   const handlePreview = (doc) => {
-      setPreviewDoc(doc);
+    setPreviewDoc(doc);
   };
 
   const handleClosePreview = () => {
-      setPreviewDoc(null);
+    setPreviewDoc(null);
   };
 
   // Datos de los documentos proporcionados por el usuario
   const documents = [
-      { 
-          title: 'Catálogo General de Soluciones', 
-          description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
-          filename: 'Group 410_merged.pdf',
-          url: CatalogGeneralPDF, 
-          icon: Leaf 
-      },
-      { 
-          title: 'Bombas de Agua Solares (HANDURO)', 
-          description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
-          filename: 'HANDURO-solar water pump catalog (1).pdf',
-          url: HanduroPumpsPDF, 
-          icon: Zap
-      },
-      { 
-          title: 'Ficha Técnica Termotanque Solar', 
-          description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
-          filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
-          url: TermotanqueDatasheetPDF, 
-          icon: Globe 
-      },
-      { 
-          title: 'Datasheet Inversores On-Grid SUN (3-15K)', 
-          description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
-          filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
-          url: InverterDatasheetPDF, 
-          icon: TrendingUp 
-      },
-      { 
-        title: 'Hoja de Datos Batería Hope 5.0L-B1', 
-        description: 'Especificaciones técnicas de la batería LiFePO4 de alta densidad para almacenamiento de energía solar.',
-        filename: 'Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf',
-        url: Hope5DatasheetPDF, 
-        icon: Battery 
+    {
+      title: 'Catálogo General de Soluciones',
+      description: 'Documento completo con todos nuestros productos y sistemas ofrecidos.',
+      filename: 'Group 410_merged.pdf',
+      url: CatalogGeneralPDF,
+      icon: Leaf
     },
-    { 
-        title: 'Datasheet Inversor MID 17-30KTL3-X2', 
-        description: 'Ficha técnica del inversor trifásico on-grid para aplicaciones comerciales e industriales.',
-        filename: 'MID_17-30KTL3-X2_Datasheet_EN_202411.pdf',
-        url: MID1730KTL3X2DatasheetPDF, 
-        icon: PlugZap 
+    {
+      title: 'Bombas de Agua Solares (HANDURO)',
+      description: 'Ficha técnica y catálogo de la línea de bombas solares para riego y aplicaciones rurales.',
+      filename: 'HANDURO-solar water pump catalog (1).pdf',
+      url: HanduroPumpsPDF,
+      icon: Zap
     },
-    { 
-        title: 'Datasheet Inversor SPF 6000 ES Plus', 
-        description: 'Detalles técnicos del inversor off-grid con soporte para paneles solares, baterías y operación en paralelo.',
-        filename: 'SPF6000ES DATASHEET.pdf',
-        url: SPF6000DatasheetPDF, 
-        icon: Power 
+    {
+      title: 'Ficha Técnica Termotanque Solar',
+      description: 'Detalles técnicos y especificaciones de los termotanques solares de tubo de vacío.',
+      filename: 'Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300 Galv. ver 2.01.pdf',
+      url: TermotanqueDatasheetPDF,
+      icon: Globe
+    },
+    {
+      title: 'Datasheet Inversores On-Grid SUN (3-15K)',
+      description: 'Especificaciones técnicas de los inversores solares para sistemas conectados a red.',
+      filename: 'datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf',
+      url: InverterDatasheetPDF,
+      icon: TrendingUp
+    },
+    {
+      title: 'Hoja de Datos Batería Hope 5.0L-B1',
+      description: 'Especificaciones técnicas de la batería LiFePO4 de alta densidad para almacenamiento de energía solar.',
+      filename: 'Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf',
+      url: Hope5DatasheetPDF,
+      icon: Battery
+    },
+    {
+      title: 'Datasheet Inversor MID 17-30KTL3-X2',
+      description: 'Ficha técnica del inversor trifásico on-grid para aplicaciones comerciales e industriales.',
+      filename: 'MID_17-30KTL3-X2_Datasheet_EN_202411.pdf',
+      url: MID1730KTL3X2DatasheetPDF,
+      icon: PlugZap
+    },
+    {
+      title: 'Datasheet Inversor SPF 6000 ES Plus',
+      description: 'Detalles técnicos del inversor off-grid con soporte para paneles solares, baterías y operación en paralelo.',
+      filename: 'SPF6000ES DATASHEET.pdf',
+      url: SPF6000DatasheetPDF,
+      icon: Power
     }
   ];
 
   return (
-      // CAMBIOS CLAVE:
-      // 1. Se mantiene 'relative' y la clase 'curved-separator'.
-      // 2. Se usa 'md:pb-[100px]' para crear un espacio de 100px en la parte inferior,
-      //    que es exactamente la altura de la curva definida en App.css.
-      <section 
-          id="documentacion" 
-          className="relative   py-16 md:pt-24 md:pb-[100px] bg-gradient-to-b from-[#2A9D8F] to-[#F3F4F6]"
-      >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-4xl font-bold text-center text-gray-50 mb-4">Documentación y Recursos Técnicos</h2>
-              <p className="text-xl text-center text-gray-50 mb-12 max-w-3xl mx-auto">
-                  Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
-              </p>
+    // CAMBIOS CLAVE:
+    // 1. Se mantiene 'relative' y la clase 'curved-separator'.
+    // 2. Se usa 'md:pb-[100px]' para crear un espacio de 100px en la parte inferior,
+    //    que es exactamente la altura de la curva definida en App.css.
+    <section
+      id="documentacion"
+      className="relative   py-16 md:pt-24 md:pb-[100px] bg-gradient-to-b from-[#2A9D8F] to-[#F3F4F6]"
+    >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+        <h2 className="text-4xl font-bold text-center text-gray-50 mb-4">Documentación y Recursos Técnicos</h2>
+        <p className="text-xl text-center text-gray-50 mb-12 max-w-3xl mx-auto">
+          Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
+        </p>
 
-              <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
-                  {documents.map((doc, index) => (
-                      <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
-                          <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
-                          <div className="flex-grow mt-4 md:mt-0">
-                              <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
-                              <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
-                              
-                              {/* Botones de Previsualización y Descarga */}
-                              <div className="flex space-x-3 mt-3">
-                                  <button
-                                      onClick={() => handlePreview(doc)}
-                                      className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
-                                  >
-                                      <Globe size={16} />
-                                      <span>Ver Previsualización</span>
-                                  </button>
-                                  <a
-                                      href={doc.url}
-                                      download={doc.filename}
-                                      className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
-                                  >
-                                      <Download size={16} />
-                                      <span>Descargar PDF</span>
-                                  </a>
-                              </div>
-                          </div>
-                      </div>
-                  ))}
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
+          {documents.map((doc, index) => (
+            <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
+              <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
+              <div className="flex-grow mt-4 md:mt-0">
+                <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
+                <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
+
+                {/* Botones de Previsualización y Descarga */}
+                <div className="flex space-x-3 mt-3">
+                  <button
+                    onClick={() => handlePreview(doc)}
+                    className="inline-flex items-center space-x-2 text-sm font-medium text-white bg-gray-900 hover:bg-gray-700 py-2 px-4 rounded-full transition duration-150"
+                  >
+                    <Globe size={16} />
+                    <span>Ver Previsualización</span>
+                  </button>
+                  <a
+                    href={doc.url}
+                    download={doc.filename}
+                    className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
+                  >
+                    <Download size={16} />
+                    <span>Descargar PDF</span>
+                  </a>
+                </div>
               </div>
-          </div>
-          
-          {/* El modal se renderiza al final de la sección y utiliza el estado */}
-          <PDFPreviewModal doc={previewDoc} onClose={handleClosePreview} />
-      </section>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* El modal se renderiza al final de la sección y utiliza el estado */}
+      <PDFPreviewModal doc={previewDoc} onClose={handleClosePreview} />
+    </section>
   );
 };
 
 // Sección de Proyectos Destacados (Sin cambios)
 const ProjectsSection = () => {
   const projects = [
-    { 
-      title: 'Cooperativa Rural ALFA', 
-      sector: 'Planta de Acopio', 
-      location: 'Tres Arroyos', 
-      img: Alfa 
-    }, 
-    { 
-      title: 'Sistema Solar para Riego Agrícola', 
-      sector: 'Agro (Riego)', 
-      location: 'Pehuencó', 
+    {
+      title: 'Cooperativa Rural ALFA',
+      sector: 'Planta de Acopio',
+      location: 'Tres Arroyos',
+      img: Alfa
+    },
+    {
+      title: 'Sistema Solar para Riego Agrícola',
+      sector: 'Agro (Riego)',
+      location: 'Pehuencó',
       img: RiegoAgricola
 
-    }, 
-    { 
-      title: 'Instalación Fotovoltaica en Nogales', 
-      sector: 'Agro (Plantación)', 
-      location: 'Choele Choel', 
+    },
+    {
+      title: 'Instalación Fotovoltaica en Nogales',
+      sector: 'Agro (Plantación)',
+      location: 'Choele Choel',
       img: PlantacionNogales
-    }, 
+    },
   ];
 
   return (
@@ -507,7 +511,7 @@ const AboutSection = () => {
   return (
     <section id="nosotros" className="py-16 md:py-24 bg-white curved">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        
+
         <div className="grid md:grid-cols-2 gap-12 items-center mb-16">
           <div>
             <h2 className="text-4xl font-bold text-gray-50 mb-4">Nuestra Historia y Misión</h2>
@@ -524,10 +528,10 @@ const AboutSection = () => {
               Conoce nuestro Propósito
             </PrimaryButton>
           </div>
-          
+
           {/* Placeholder de imagen o video */}
           <div className="rounded-xl overflow-hidden shadow-2xl">
-            <img 
+            <img
               src={VisionMision}
               alt="Equipo de TecnoGen"
               className="w-full h-full object-cover"
@@ -535,7 +539,7 @@ const AboutSection = () => {
             />
           </div>
         </div>
-        
+
         {/* Sección de Valores */}
         <div className="mt-16 pt-12 border-t border-gray-200">
           <h3 className="text-3xl font-bold text-center text-gray-50 mb-8">Nuestros Valores Fundamentales</h3>
@@ -545,7 +549,7 @@ const AboutSection = () => {
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {displayedValues.map((value, index) => (
               <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg border-2 border-[#2A9D8F]">
-               <CheckCircle size={32} className="text-[#2A9D8F] mb-3" />
+                <CheckCircle size={32} className="text-[#2A9D8F] mb-3" />
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h4>
                 <p className="text-sm text-gray-700">{value.description}</p>
               </div>
@@ -566,85 +570,93 @@ const ContactSection = () => (
       <p className="text-xl font-medium mb-8 max-w-3xl mx-auto">
         Transformamos la forma en que accedes a la energía, ofreciendo alternativas limpias, accesibles y confiables.
       </p>
-    <PrimaryButton className="bg-[#31AE8A] text-gray-900 hover:bg-gray-100 m-auto">
-        Agenda una Consulta Gratuita
-      </PrimaryButton>
+      {/* Aquí se envuelve el botón con el enlace de WhatsApp */}
+      <a
+        href="https://wa.me/+5492915331739?text=Hola,%20me%20gustaría%20agendar%20una%20consulta%20gratuita%20para%20asesoramiento%20sobre%20soluciones%20de%20energía%20renovable."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="inline-block" // Para centrar el botón si PrimaryButton no lo hace
+      >
+        <PrimaryButton className="bg-[#31AE8A] text-gray-900 hover:bg-gray-100 m-auto">
+          Agenda una Consulta Gratuita
+        </PrimaryButton>
+      </a>
     </div>
   </section>
 );
 
 // Pie de Página (Footer) (Con enlace de WhatsApp)
 const Footer = () => (
-    <footer className="bg-gray-900 text-white py-12">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
-          {/* Columna 1: Logo y Misión */}
-          <div>
-            <a href="#" className="flex items-center text-2xl font-bold mb-3">
-            <img src={LogoFO} alt="Logo Tecnogen" width="200px"/>
-            </a>
-            <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
-          </div>
-  
-          {/* Columna 2: Enlaces Rápidos */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Enlaces</h4>
-            <ul className="space-y-2"> 
-              {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
-                <li key={item}>
-                  <a href={`#${item.toLowerCase().replace('ó', 'o')}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
-                    {item}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-  
-          {/* Columna 3: Contacto */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
-            <ul className="space-y-2 text-sm text-gray-400">
-              <li>Email: info@tecnogen.com</li>
-              <li>Tel: +5492915331739</li>
-                  {/* Nuevo elemento para WhatsApp */}
-              <li>
-                <a 
-                  href="https://wa.me/+5492915331739?text=Hola!%20quiero%20que%20me%20asesoren.%20" 
-                  className="text-gray-400 hover:text-[#25D366] transition duration-150  items-center"
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
-                  {/* Si tienes un ícono de WhatsApp (ej. de 'lucide-react') lo puedes añadir aquí. */}
-                  {/* Por ahora, solo texto: */}
-                  Chatea con nosotros (WhatsApp)
-                </a>
-              </li>
-              <li>Dirección: Calle Falsa 123, CABA, Argentina</li>
-            </ul>
-          </div>
-  
-          {/* Columna 4: Legal y Redes */}
-          <div>
-            <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Legal & Redes</h4>
-            <ul className="space-y-2 text-sm">
-              <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
-              <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
-            </ul>
-            {/* Social Icons Placeholder */}
-            <div className="flex space-x-4 mt-4">
-              <Globe size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-              <Users size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-              <TrendingUp size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
-            </div>
-          </div>
-        </div>
-  
-        <div className="text-center text-sm text-gray-500 pt-4">
-          © {new Date().getFullYear()} TecnoGen. Todos los derechos reservados.
-        </div>
-      </div>
-    </footer>
-  );
+  <footer className="bg-gray-900 text-white py-12">
+    <div className="container mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="grid md:grid-cols-4 gap-8 border-b border-gray-700 pb-8 mb-8">
+        {/* Columna 1: Logo y Misión */}
+        <div>
+          <a href="#" className="flex items-center text-2xl font-bold mb-3">
+            <img src={LogoFO} alt="Logo Tecnogen" width="200px" />
+          </a>
+          <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
+        </div>
+
+        {/* Columna 2: Enlaces Rápidos */}
+        <div>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Enlaces</h4>
+          <ul className="space-y-2">
+            {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
+              <li key={item}>
+                <a href={`#${item.toLowerCase().replace('ó', 'o')}`} className="text-gray-400 hover:text-white text-sm transition duration-150">
+                  {item}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        {/* Columna 3: Contacto */}
+        <div>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
+          <ul className="space-y-2 text-sm text-gray-400">
+            <li>Email: info@tecnogen.com</li>
+            <li>Tel: +5492915331739</li>
+            {/* Nuevo elemento para WhatsApp */}
+            <li>
+              <a
+                href="https://wa.me/+5492915331739?text=Hola!%20quiero%20que%20me%20asesoren.%20"
+                className="text-gray-400 hover:text-[#25D366] transition duration-150  items-center"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {/* Si tienes un ícono de WhatsApp (ej. de 'lucide-react') lo puedes añadir aquí. */}
+                {/* Por ahora, solo texto: */}
+                Chatea con nosotros (WhatsApp)
+              </a>
+            </li>
+            <li>Dirección: Calle Falsa 123, CABA, Argentina</li>
+          </ul>
+        </div>
+
+        {/* Columna 4: Legal y Redes */}
+        <div>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Legal & Redes</h4>
+          <ul className="space-y-2 text-sm">
+            <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
+            <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
+          </ul>
+          {/* Social Icons Placeholder */}
+          <div className="flex space-x-4 mt-4">
+            <Globe size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+            <Users size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+            <TrendingUp size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+          </div>
+        </div>
+      </div>
+
+      <div className="text-center text-sm text-gray-500 pt-4">
+        © {new Date().getFullYear()} TecnoGen. Todos los derechos reservados.
+      </div>
+    </div>
+  </footer>
+);
 
 // --- Componente Principal ---
 export default function App() {
@@ -654,7 +666,7 @@ export default function App() {
       <main>
         <HeroSection />
         <ServicesSection />
-        <CatalogsSection /> 
+        <CatalogsSection />
         <ProjectsSection />
         <AboutSection />
         <ContactSection />
