@@ -211,7 +211,7 @@ const ServicesSection = () => {
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 hover:shadow-2xl z-20">
+            <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 z-20">
               <service.icon size={48} className="text-[#2A9D8F] mb-4" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">{service.title}</h3>
               <p className="text-gray-700">{service.description}</p>
@@ -408,7 +408,7 @@ const CatalogsSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {documents.map((doc, index) => (
-            <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
+            <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 ">
               <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
               <div className="flex-grow mt-4 md:mt-0">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
@@ -478,7 +478,7 @@ const ProjectsSection = () => {
 
         <div className="grid md:grid-cols-3 gap-6">
           {projects.map((project, index) => (
-            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
+            <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 ">
               <img src={project.img} alt={project.title} className="w-full h-48 object-cover" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x250/0FE778/000?text=Imagen+No+Disponible'; }} />
               <div className="p-6">
                 <p className="text-sm font-semibold text-[#2A9D8F] uppercase mb-1">{project.sector} - {project.location}</p>
