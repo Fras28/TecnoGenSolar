@@ -1,11 +1,14 @@
 import React, { useState, useEffect} from 'react';
 // Importamos los iconos necesarios
-import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download } from 'lucide-react';
-import Logo from "../src/assets/tecnogen.png"
+import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download, Battery, Power, PlugZap, Lightbulb, CloudOff, RefreshCw } from 'lucide-react';
+import Logo from "../src/assets/LogoFB.png"
+import LogoFO from "../src/assets/LogoFO.png"
 import VideoSolar from "../src/assets/SolarEnergy.mp4"
 import MobileHeroImg from "../src/assets/HeroMobile.jpg"
 import VisionMision from "../src/assets/VisionyMision.png"
-
+import RiegoAgricola from "../src/assets/RiegoAgricola.png"
+import PlantacionNogales from "../src/assets/PlantacionNogal.jpg"
+import Alfa from "../src/assets/Alfa.jpg"
 // -------------------------------------------------------------------
 // 1. IMPORTACIÓN DE LOS ARCHIVOS PDF (Rutas internas)
 // -------------------------------------------------------------------
@@ -14,6 +17,9 @@ import CatalogGeneralPDF from "./assets/pdfs/Group 410_merged.pdf";
 import HanduroPumpsPDF from "./assets/pdfs/HANDURO-solar water pump catalog (1).pdf";
 import TermotanqueDatasheetPDF from "./assets/pdfs/Datasheet Termotanque Tubo de Vacío - Galvanizado TS-TV100.. 300  Galv. ver 2.01.pdf";
 import InverterDatasheetPDF from "./assets/pdfs/datasheet_sun-3-15k-g06p3-eu-am2_240513_en.pdf";
+import Hope5DatasheetPDF from "./assets/pdfs/Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf";
+import MID1730KTL3X2DatasheetPDF from "./assets/pdfs/MID_17-30KTL3-X2_Datasheet_EN_202411.pdf";
+import SPF6000DatasheetPDF from "./assets/pdfs/SPF6000ES DATASHEET.pdf";
 
 
 // URL del video de fondo. ¡Reemplaza con tu propio video!
@@ -58,8 +64,8 @@ const Header = () => {
         
         {/* Logo */}
         <a href="#" className="flex items-center text-2xl font-bold text-gray-900">
-         <img src={Logo} alt="Logo Tecnogen" width="40px"/>
-          Tecno<span className="text-green-500">Gen</span>
+         <img src={Logo} alt="Logo Tecnogen" width="180px"/>
+   
         </a>
 
         {/* Navegación (Solo Desktop/Tablet) */}
@@ -68,7 +74,7 @@ const Header = () => {
             <a
               key={item}
               href={`#${item.toLowerCase().replace('ó', 'o')}`} // Manejo de tildes para IDs
-              className="text-gray-600 hover:text-green-500 transition duration-150"
+              className="text-gray-600 hover:text-[#2A9D8F] transition duration-150"
             >
               {item}
             </a>
@@ -86,7 +92,7 @@ const Header = () => {
         {/* Menú Móvil (Icono Toggle) */}
         <div className="md:hidden">
           <button 
-            className="text-gray-900 hover:text-green-500 p-2 transition duration-150"
+            className="text-gray-900 hover:text-[#2A9D8F] p-2 transition duration-150"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-expanded={isMenuOpen}
             aria-controls="mobile-menu"
@@ -115,7 +121,7 @@ const Header = () => {
             </a>
           ))}
           <div className="pt-4 pb-2 w-full">
-            <PrimaryButton className="w-full bg-green-400  ">
+            <PrimaryButton className="w-full bg-[#31AE8A]  ">
               <Phone size={18} className="mr-1" />
               Hablemos 
             </PrimaryButton>
@@ -126,7 +132,7 @@ const Header = () => {
   );
 };
 
-// Sección Principal (Hero) - Optimizada para Mobile
+// Sección Principal (Hero) - MODIFICADA: Incorpora el slogan "ENERGÍA QUE FLUYE"
 const HeroSection = () => (
   <section id="inicio" className="relative h-[90vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 ">
     {/* Video de Fondo (Solo Desktop) */}
@@ -156,18 +162,21 @@ const HeroSection = () => (
     
     {/* Contenido (Título y Botones) */}
     <div className="relative z-10 text-white p-6 max-w-4xl w-full"> 
+      <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#2A9D8F] mb-2 uppercase tracking-widest">
+        ENERGÍA QUE FLUYE
+      </h2>
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 px-2">
-        Transformamos Energía. <span className="text-green-500">Transformamos el Futuro.</span>
+        La Solución Solar para tu Autonomía y Ahorro.
       </h1>
       <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto px-2">
-        Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
+        La energía se mueve, conecta y transforma. En TECNOGEN la guiamos para que llegue a donde más la necesitás: hogares, empresas y proyectos rurales.
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
         {/* Botones Full-Width en Mobile (w-full sm:w-auto) */}
-        <PrimaryButton className="text-lg w-full sm:w-auto bg-green-500">
+        <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]">
           Descubre Soluciones
         </PrimaryButton>
-        <PrimaryButton className="text-lg w-full sm:w-auto bg-green-500" >
+        <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]" >
           Contáctanos Hoy
         </PrimaryButton>
       </div>
@@ -175,26 +184,26 @@ const HeroSection = () => (
   </section>
 );
 
-// Sección de Servicios/Soluciones
+// Sección de Servicios/Soluciones - MODIFICADA: Foco en ON-GRID, OFF-GRID, HÍBRIDO
 const ServicesSection = () => {
   const services = [
-    { icon: Leaf, title: 'Energía Solar Fotovoltaica', description: 'Diseño e instalación de parques solares y sistemas on-grid para empresas e industrias.' },
-    { icon: Zap, title: 'Eficiencia Energética', description: 'Auditorías y optimización de consumo para reducir costos operativos y huella de carbono.' },
-    { icon: Globe, title: 'Proyectos a Gran Escala', description: 'Gestión integral de proyectos de energía renovable de alta potencia y complejidad.' },
+    { icon: PlugZap, title: 'Sistema ON-GRID', description: 'Integración a la red eléctrica existente. Ahorro significativo desde el primer día, ideal para viviendas y comercios urbanos.' },
+    { icon: CloudOff, title: 'Sistema OFF-GRID (Autónomo)', description: 'Independencia total de la red. Solución perfecta para zonas rurales, estancias y sistemas de bombeo solar.' },
+    { icon: RefreshCw, title: 'Sistema HÍBRIDO', description: 'Combina ahorro y respaldo. Utiliza baterías para continuidad operativa y flexibilidad ante cortes frecuentes.' },
   ];
 
   return (
     <section id="soluciones" className="py-16 md:py-24 bg-white">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Nuestras Soluciones Clave</h2>
+        <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Nuestros Sistemas Energéticos</h2>
         <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
-          Ofrecemos un portafolio de servicios innovadores adaptados a las necesidades de cada cliente, impulsando la sostenibilidad.
+          Diseñamos cada instalación a medida, adaptando la tecnología solar (On-Grid, Off-Grid o Híbrida) a tus necesidades de ahorro, autonomía y seguridad.
         </p>
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <div key={index} className="p-8 bg-gray-50 rounded-xl shadow-xl border-t-4 border-techno-green transition duration-300 hover:shadow-2xl">
-              <service.icon size={48} className="text-green-500 mb-4" />
+              <service.icon size={48} className="text-[#2A9D8F] mb-4" />
               <h3 className="text-2xl font-semibold text-gray-900 mb-3">{service.title}</h3>
               <p className="text-gray-700">{service.description}</p>
             </div>
@@ -205,7 +214,7 @@ const ServicesSection = () => {
   );
 };
 
-// COMPONENTE MODAL DE PREVISUALIZACIÓN DE PDF
+// COMPONENTE MODAL DE PREVISUALIZACIÓN DE PDF (Sin cambios)
 const PDFPreviewModal = ({ doc, onClose }) => {
   const [pdfUrl, setPdfUrl] = useState(null);
 
@@ -306,7 +315,7 @@ const PDFPreviewModal = ({ doc, onClose }) => {
 };
 
 
-// SECCIÓN: Documentación y Catálogos (¡Con Previsualización!)
+// SECCIÓN: Documentación y Catálogos (Sin cambios)
 const CatalogsSection = () => {
     // Estado para controlar qué documento se previsualiza
     const [previewDoc, setPreviewDoc] = useState(null);
@@ -349,6 +358,27 @@ const CatalogsSection = () => {
             url: InverterDatasheetPDF, 
             icon: TrendingUp 
         },
+        { 
+          title: 'Hoja de Datos Batería Hope 5.0L-B1', 
+          description: 'Especificaciones técnicas de la batería LiFePO4 de alta densidad para almacenamiento de energía solar.',
+          filename: 'Hope_5.0L-B1_Hoja_de_datos_MX_202410.pdf',
+          url: Hope5DatasheetPDF, 
+          icon: Battery 
+      },
+      { 
+          title: 'Datasheet Inversor MID 17-30KTL3-X2', 
+          description: 'Ficha técnica del inversor trifásico on-grid para aplicaciones comerciales e industriales.',
+          filename: 'MID_17-30KTL3-X2_Datasheet_EN_202411.pdf',
+          url: MID1730KTL3X2DatasheetPDF, 
+          icon: PlugZap 
+      },
+      { 
+          title: 'Datasheet Inversor SPF 6000 ES Plus', 
+          description: 'Detalles técnicos del inversor off-grid con soporte para paneles solares, baterías y operación en paralelo.',
+          filename: 'SPF6000ES DATASHEET.pdf',
+          url: SPF6000DatasheetPDF, 
+          icon: Power 
+      }
     ];
 
   return (
@@ -362,7 +392,7 @@ const CatalogsSection = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-2 gap-8">
           {documents.map((doc, index) => (
             <div key={index} className="flex flex-col md:flex-row items-start p-6 bg-white rounded-xl shadow-lg border-l-4 border-techno-green transition duration-300 hover:shadow-xl">
-              <doc.icon size={36} className="text-green-500 mr-4 flex-shrink-0 mt-1" />
+              <doc.icon size={36} className="text-[#2A9D8F] mr-4 flex-shrink-0 mt-1" />
               <div className="flex-grow mt-4 md:mt-0">
                 <h3 className="text-xl font-semibold text-gray-900 mb-1">{doc.title}</h3>
                 <p className="text-gray-600 text-sm mb-3">{doc.description}</p>
@@ -397,26 +427,27 @@ const CatalogsSection = () => {
   );
 };
 
-// Sección de Proyectos Destacados (Similar a Portfolio)
+// Sección de Proyectos Destacados (Sin cambios)
 const ProjectsSection = () => {
   const projects = [
     { 
       title: 'Cooperativa Rural ALFA', 
       sector: 'Planta de Acopio', 
       location: 'Tres Arroyos', 
-      img: 'https://placehold.co/400x250/0FE778/000?text=Planta+Rural+ALFA' 
+      img: Alfa 
     }, 
     { 
       title: 'Sistema Solar para Riego Agrícola', 
       sector: 'Agro (Riego)', 
       location: 'Pehuencó', 
-      img: 'https://placehold.co/400x250/0FE778/000?text=Riego+Agrícola' 
+      img: RiegoAgricola
+
     }, 
     { 
       title: 'Instalación Fotovoltaica en Nogales', 
       sector: 'Agro (Plantación)', 
       location: 'Choele Choel', 
-      img: 'https://placehold.co/400x250/0FE778/000?text=Plantación+de+Nogales' 
+      img: PlantacionNogales
     }, 
   ];
 
@@ -433,9 +464,9 @@ const ProjectsSection = () => {
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden transition duration-300 hover:shadow-xl">
               <img src={project.img} alt={project.title} className="w-full h-48 object-cover" onError={(e) => { e.target.onerror = null; e.target.src = 'https://placehold.co/400x250/0FE778/000?text=Imagen+No+Disponible'; }} />
               <div className="p-6">
-                <p className="text-sm font-semibold text-green-500 uppercase mb-1">{project.sector} - {project.location}</p>
+                <p className="text-sm font-semibold text-[#2A9D8F] uppercase mb-1">{project.sector} - {project.location}</p>
                 <h3 className="text-xl font-bold text-gray-900 mb-2">{project.title}</h3>
-                <a href="#" className="text-green-500 font-medium hover:underline text-sm flex items-center">
+                <a href="#" className="text-[#2A9D8F] font-medium hover:underline text-sm flex items-center">
                   Ver caso completo <ChevronRight size={16} />
                 </a>
               </div>
@@ -447,14 +478,18 @@ const ProjectsSection = () => {
   );
 };
 
-// Sección Quiénes Somos (About Us)
+// Sección Quiénes Somos (About Us) - MODIFICADA: Se agrega el valor "Compromiso"
 const AboutSection = () => {
   const values = [
-    { title: 'Honestidad', description: 'Compromiso con la verdad, la transparencia y la confianza en cada propuesta.' },
-    { title: 'Vocación de Servicio', description: 'Acompañamos cada etapa del proyecto con cercanía y dedicación.' },
+    { title: 'Honestidad', description: 'Transparencia en cada propuesta y decisión, construyendo confianza a largo plazo.' },
+    { title: 'Vocación de Servicio', description: 'Acompañamos cada etapa del proyecto con cercanía y dedicación real.' },
+    { title: 'Compromiso', description: 'Cumplimiento técnico y responsabilidad profesional en todos los proyectos.' },
     { title: 'Eficiencia', description: 'Optimizamos recursos y tecnologías para garantizar el máximo rendimiento.' },
     { title: 'Sustentabilidad', description: 'Impulsamos una energía que cuida lo que nos rodea, promoviendo un uso responsable.' },
   ];
+  // Filtramos la lista para que el grid se vea mejor (usamos 4 de 5, incluyendo el nuevo 'Compromiso')
+  const displayedValues = values.filter(v => ['Honestidad', 'Vocación de Servicio', 'Compromiso', 'Sustentabilidad'].includes(v.title));
+
 
   return (
     <section id="nosotros" className="py-16 md:py-24 bg-white">
@@ -495,9 +530,9 @@ const AboutSection = () => {
             Nuestro trabajo se basa en llevar energía limpia a donde se necesita, con honestidad, compromiso y excelencia técnica.
           </p>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {values.map((value, index) => (
+            {displayedValues.map((value, index) => (
               <div key={index} className="flex flex-col items-center text-center p-4 bg-gray-50 rounded-lg">
-               <CheckCircle size={32} className="text-green-500 mb-3" />
+               <CheckCircle size={32} className="text-[#2A9D8F] mb-3" />
                 <h4 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h4>
                 <p className="text-sm text-gray-700">{value.description}</p>
               </div>
@@ -510,7 +545,7 @@ const AboutSection = () => {
   );
 };
 
-// Sección de Contacto y CTA final
+// Sección de Contacto y CTA final (Sin cambios)
 const ContactSection = () => (
   <section id="contacto" className="py-16 md:py-24 bg-techno-green text-gray-900">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -518,14 +553,14 @@ const ContactSection = () => (
       <p className="text-xl font-medium mb-8 max-w-3xl mx-auto">
         Transformamos la forma en que accedes a la energía, ofreciendo alternativas limpias, accesibles y confiables.
       </p>
-      <PrimaryButton className="bg-green-500 text-gray-900 hover:bg-gray-100 m-auto">
+    <PrimaryButton className="bg-[#31AE8A] text-gray-900 hover:bg-gray-100 m-auto">
         Agenda una Consulta Gratuita
       </PrimaryButton>
     </div>
   </section>
 );
 
-// Pie de Página (Footer)
+// Pie de Página (Footer) (Sin cambios)
 const Footer = () => (
   <footer className="bg-gray-900 text-white py-12">
     <div className="container mx-auto px-4 sm:px-6 lg:px-8">
@@ -533,15 +568,14 @@ const Footer = () => (
         {/* Columna 1: Logo y Misión */}
         <div>
           <a href="#" className="flex items-center text-2xl font-bold mb-3">
-          <img src={Logo} alt="Logo Tecnogen" width="40px"/>
-            Techno<span className="text-green-500" color='#0FE778'>Gen</span>
+          <img src={LogoFO} alt="Logo Tecnogen" width="200px"/>
           </a>
           <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
         </div>
 
         {/* Columna 2: Enlaces Rápidos */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-green-500">Enlaces</h4>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Enlaces</h4>
           <ul className="space-y-2"> 
             {['Inicio', 'Soluciones', 'Documentación', 'Proyectos', 'Nosotros'].map((item) => (
               <li key={item}>
@@ -555,7 +589,7 @@ const Footer = () => (
 
         {/* Columna 3: Contacto */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-green-500">Contacto</h4>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
           <ul className="space-y-2 text-sm text-gray-400">
             <li>Email: info@tecnogen.com</li>
             <li>Tel: +54 9 11 XXXX-XXXX</li>
@@ -565,16 +599,16 @@ const Footer = () => (
 
         {/* Columna 4: Legal y Redes */}
         <div>
-          <h4 className="text-lg font-semibold mb-4 text-green-500">Legal & Redes</h4>
+          <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Legal & Redes</h4>
           <ul className="space-y-2 text-sm">
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Política de Privacidad</a></li>
             <li><a href="#" className="text-gray-400 hover:text-white transition duration-150">Términos de Uso</a></li>
           </ul>
           {/* Social Icons Placeholder */}
           <div className="flex space-x-4 mt-4">
-            <Globe size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
-            <Users size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
-            <TrendingUp size={20} className="text-gray-400 hover:text-green-500 cursor-pointer" />
+            <Globe size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+            <Users size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
+            <TrendingUp size={20} className="text-gray-400 hover:text-[#2A9D8F] cursor-pointer" />
           </div>
         </div>
       </div>
