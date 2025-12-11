@@ -393,8 +393,8 @@ const CatalogsSection = () => {
           className="relative   py-16 md:pt-24 md:pb-[100px] bg-gradient-to-b from-[#2A9D8F] to-[#F3F4F6]"
       >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-              <h2 className="text-4xl font-bold text-center text-gray-900 mb-4">Documentación y Recursos Técnicos</h2>
-              <p className="text-xl text-center text-gray-600 mb-12 max-w-3xl mx-auto">
+              <h2 className="text-4xl font-bold text-center text-gray-50 mb-4">Documentación y Recursos Técnicos</h2>
+              <p className="text-xl text-center text-gray-50 mb-12 max-w-3xl mx-auto">
                   Descargue nuestros catálogos y fichas técnicas actualizadas o previsualícelos en línea.
               </p>
 
@@ -508,13 +508,13 @@ const AboutSection = () => {
           <div>
             <h2 className="text-4xl font-bold text-gray-50 mb-4">Nuestra Historia y Misión</h2>
             <p className="text-lg text-gray-50 mb-4">
-              Desde **2013**, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las **energías renovables**, incorporando sistemas solares fotovoltaicos.
+              Desde <b>2013</b>, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las <b>energías renovables</b>, incorporando sistemas solares fotovoltaicos.
             </p>
             <p className="text-lg text-gray-50 mb-6 font-semibold border-l-4 border-techno-green pl-4 italic">
-              **Misión:** Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
+              <b>Misión:</b> Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
             </p>
             <p className="text-lg text-gray-50 mb-6">
-              **Visión:** Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
+              <b>Visión:</b> Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
             </p>
             <PrimaryButton className="bg-gray-900 text-white hover:bg-gray-800">
               Conoce nuestro Propósito
