@@ -207,49 +207,52 @@ const ServicesSection = () => {
 
 // COMPONENTE MODAL DE PREVISUALIZACIÓN DE PDF
 const PDFPreviewModal = ({ doc, onClose }) => {
-    if (!doc) return null;
+  if (!doc) return null;
 
-    return (
-        // Overlay fijo que se cierra al hacer clic fuera del modal
-        <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-75 p-4" onClick={onClose}>
-            {/* Contenedor del Modal */}
-            <div 
-                className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col" 
-                onClick={(e) => e.stopPropagation()} // Evita que el clic dentro cierre el modal
-            >
-                {/* Cabecera del Modal */}
-                <div className="p-4 border-b flex justify-between items-center flex-shrink-0">
-                    <h3 className="text-xl font-semibold text-gray-900">
-                        {doc.title} - Previsualización
-                    </h3>
-                    <button 
-                        onClick={onClose} 
-                        className="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-100 transition"
-                        aria-label="Cerrar previsualización"
-                    >
-                        <X size={24} />
-                    </button>
-                </div>
-
-                {/* Contenido del PDF (Iframe) */}
-                {/* La altura se calcula para ocupar el resto del espacio del modal */}
-                <iframe 
-                    src={doc.url} 
-                    title={doc.title}
-                    className="w-full flex-grow" 
-                    frameBorder="0"
-                >
-                    {/* Fallback para navegadores antiguos */}
-                    <p className="p-4 text-center">
-                        Tu navegador no soporta la previsualización de PDF en línea. 
-                        <a href={doc.url} download={doc.filename} className="text-green-500 underline font-medium ml-1">
-                            Haz clic aquí para descargar el documento.
-                        </a>
-                    </p>
-                </iframe>
-            </div>
+  return (
+    <div className="fixed inset-0 z-[100] flex items-center justify-center bg-black bg-opacity-75 p-4" onClick={onClose}>
+      <div 
+        className="bg-white rounded-lg shadow-2xl w-full max-w-4xl h-[90vh] flex flex-col" 
+        onClick={(e) => e.stopPropagation()}
+      >
+        <div className="p-4 border-b flex justify-between items-center flex-shrink-0 bg-gray-50">
+          <h3 className="text-xl font-semibold text-gray-900">
+            {doc.title} - Previsualización
+          </h3>
+          <button 
+            onClick={onClose} 
+            className="text-gray-500 hover:text-gray-900 p-2 rounded-full hover:bg-gray-200 transition"
+          >
+            <X size={24} />
+          </button>
         </div>
-    );
+
+        <div className="flex-grow bg-gray-100">
+          <object
+            data={`${doc.url}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
+            type="application/pdf"
+            width="100%"
+            height="100%"
+          >
+            <embed
+              src={`${doc.url}#toolbar=1&navpanes=0&scrollbar=1&view=FitH`}
+              type="application/pdf"
+              width="100%"
+              height="100%"
+            />
+          </object>
+        </div>
+
+        {/* Fallback visible si todo falla */}
+        <div className="p-4 bg-gray-800 text-white text-center">
+          No se puede mostrar el PDF. 
+          <a href={doc.url} download={doc.filename} className="ml-2 underline hover:text-green-400">
+            → Descargar ahora
+          </a>
+        </div>
+      </div>
+    </div>
+  );
 };
 
 
