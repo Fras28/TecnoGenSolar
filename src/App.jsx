@@ -136,7 +136,7 @@ const Header = () => {
   );
 };
 
-// Sección Principal (Hero) - MODIFICADA: Incorpora el slogan "ENERGÍA QUE FLUYE"
+// Sección Principal (Hero) - MODIFICADA: Incorpora el slogan "TRANSFORMAMOS ENERGÍA"
 const HeroSection = () => (
   <section id="inicio" className="relative h-[90vh] md:h-[90vh] flex items-center justify-center text-center bg-gray-900 ">
     {/* Video de Fondo (Solo Desktop) */}
@@ -167,13 +167,13 @@ const HeroSection = () => (
     {/* Contenido (Título y Botones) */}
     <div className="relative z-10 text-white p-6 max-w-4xl w-full">
       <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold text-[#2A9D8F] mb-2 uppercase tracking-widest">
-        ENERGÍA QUE FLUYE
+        TRANSFORMAMOS ENERGÍA
       </h2>
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 px-2">
         La Solución Solar para tu Autonomía y Ahorro.
       </h1>
       <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto px-2">
-        La energía se mueve, conecta y transforma. En TECNOGEN la guiamos para que llegue a donde más la necesitás: hogares, empresas y proyectos rurales.
+      Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
         {/* Botones Full-Width en Mobile (w-full sm:w-auto) */}
