@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Helmet, HelmetProvider } from 'react-helmet-async';
 import './App.css';
 // Importamos los iconos necesarios
 import { Leaf, Zap, Globe, Users, TrendingUp, Phone, ChevronRight, Menu, X, CheckCircle, Download, Battery, Power, PlugZap, Lightbulb, CloudOff, RefreshCw } from 'lucide-react';
@@ -170,19 +171,19 @@ const HeroSection = () => (
         TRANSFORMAMOS ENERGÍA
       </h2>
       <h1 className="text-4xl sm:text-6xl lg:text-7xl font-extrabold leading-tight mb-4 px-2">
-        La Solución Solar para tu Autonomía y Ahorro.
+        TecnoGen: Energía Solar para tu Autonomía y Ahorro en Argentina
       </h1>
       <p className="text-lg sm:text-xl font-light mb-8 max-w-2xl mx-auto px-2">
-      Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
+        Convertimos la fuerza del sol en soluciones reales, eficientes y sustentables. Energía que se transforma para transformar.
       </p>
       <div className="flex flex-col sm:flex-row justify-center space-y-4 sm:space-y-0 sm:space-x-6 px-4">
         {/* Botones Full-Width en Mobile (w-full sm:w-auto) */}
         <a href="#soluciones">
-            <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]">
-          Descubre Soluciones
-        </PrimaryButton>
+          <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]">
+            Descubre Soluciones
+          </PrimaryButton>
         </a>
-      
+
         <a href="tel:+5492915331739">
           <PrimaryButton className="text-lg w-full sm:w-auto bg-[#31AE8A]" >
             Contáctanos Hoy
@@ -426,6 +427,8 @@ const CatalogsSection = () => {
                   <a
                     href={doc.url}
                     download={doc.filename}
+                    title={`Descargar ${doc.title}`}
+                    aria-label={`Descargar archivo PDF: ${doc.title}`}
                     className="inline-flex items-center space-x-2 text-sm font-medium text-gray-900 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-full transition duration-150"
                   >
                     <Download size={16} />
@@ -519,7 +522,7 @@ const AboutSection = () => {
               Desde <b>2013</b>, TECNOGEN ha trabajado para garantizar energía segura y confiable. Iniciamos con la venta y mantenimiento de grupos electrógenos industriales, y evolucionamos hacia las <b>energías renovables</b>, incorporando sistemas solares fotovoltaicos.
             </p>
             <p className="text-lg text-gray-50 mb-6 border-l-4 border-techno-green pl-4 italic">
-              <b>Misión:</b> Brindar soluciones energéticas eficientes y sustentables, garantizando seguridad, ahorro y respaldo técnico en cada etapa del proceso, con vocación de servicio honesta y transparente.
+              <b>Misión:</b> Brindamos soluciones de energía solar en Bahía Blanca, Buenos Aires y toda la región pampeana.
             </p>
             <p className="text-lg text-gray-50 mb-6">
               <b>Visión:</b> Consolidarnos como referente regional en la transición hacia una energía limpia y confiable, equilibrando el crecimiento económico con la responsabilidad social y la protección ambiental.
@@ -593,7 +596,7 @@ const Footer = () => (
         {/* Columna 1: Logo y Misión */}
         <div>
           <a href="#" className="flex items-center text-2xl font-bold mb-3">
-            <img src={LogoFO} alt="Logo Tecnogen" width="200px" />
+            <img src={LogoFO} alt="TecnoGen - Instalación de paneles solares y energía renovable en Argentina" width="200px" loading="lazy" />
           </a>
           <p className="text-sm text-gray-400">Impulsando un mundo más limpio con tecnología de punta en energía renovable.</p>
         </div>
@@ -661,17 +664,44 @@ const Footer = () => (
 // --- Componente Principal ---
 export default function App() {
   return (
-    <div className="min-h-screen font-sans">
-      <Header />
-      <main>
-        <HeroSection />
-        <ServicesSection />
-        <CatalogsSection />
-        <ProjectsSection />
-        <AboutSection />
-        <ContactSection />
-      </main>
-      <Footer />
-    </div>
+    <HelmetProvider>
+      <div className="min-h-screen font-sans">
+        <Helmet>
+          {/* Título de la pestaña (Máximo 60 caracteres) */}
+          <title>TecnoGen | Energía Solar en Bahía Blanca y Argentina</title>
+
+          {/* Meta Descripción (Es lo que aparece en Google debajo del título. Máximo 155 caracteres) */}
+          <meta
+            name="description"
+            content="Expertos en sistemas solares On-Grid, Off-Grid e Híbridos. Soluciones eficientes para el agro y la ciudad. ¡Ahorra energía con TecnoGen!"
+          />
+          <link rel="manifest" href="/manifest.json" />
+          <meta name="theme-color" content="#0FE778" />
+          {/* Palabras clave (Aunque Google ya casi no las usa, otros buscadores sí) */}
+          <meta name="keywords" content="paneles solares, energía renovable, argentina, bahia blanca, bombeo solar, inversores solar, ahorro energetico" />
+
+          {/* Open Graph (Para que se vea profesional al compartir por WhatsApp o redes) */}
+          <meta property="og:title" content="TecnoGen - Transformamos Energía" />
+          <meta property="og:description" content="Soluciones solares a medida para tu hogar, campo o empresa." />
+          <meta property="og:type" content="website" />
+          {/* Aquí puedes poner la URL de una imagen de tu carpeta assets si la tienes online */}
+          <meta property="og:image" content="https://tecnogenargentina.com/LogoFB.png" />
+
+          {/* Canonical URL (Evita contenido duplicado) */}
+          <link rel="canonical" href="https://www.tecnogenargentina.com/" />
+        </Helmet>
+
+        <Header />
+        <main>
+          <HeroSection />
+          <ServicesSection />
+          <CatalogsSection />
+          <ProjectsSection />
+          <AboutSection />
+          <ContactSection />
+        </main>
+        <Footer />
+      </div>
+    </HelmetProvider>
   );
 }
