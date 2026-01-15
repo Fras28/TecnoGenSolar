@@ -634,7 +634,7 @@ const Footer = () => (
                 Chatea con nosotros (WhatsApp)
               </a>
             </li>
-            <li>Dirección: Calle Falsa 123, CABA, Argentina</li>
+            <li><a href="https://maps.app.goo.gl/Edw7iXBgK9q5wfG89" target="_blank" rel="noopener noreferrer"   className="text-gray-400 hover:text-[#25D366] transition duration-150  items-center">Dirección: Almafuerte 399, Bahía Blanca, Provincia de Buenos Aires</a></li>
           </ul>
         </div>
 
