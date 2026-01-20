@@ -619,7 +619,7 @@ const Footer = () => (
         <div>
           <h4 className="text-lg font-semibold mb-4 text-[#2A9D8F]">Contacto</h4>
           <ul className="space-y-2 text-sm text-gray-400">
-            <li>Email: info@tecnogen.com</li>
+            <li>Email: tecnogenarg@gmail.com</li>
             <li>Tel: +5492915331739</li>
             {/* Nuevo elemento para WhatsApp */}
             <li>
